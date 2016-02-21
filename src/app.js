@@ -21,8 +21,8 @@ var TrafficGlanceApp = React.createClass({
     return (
       <div>
         <div className='toolbar'>
-          <a href='#'><img src='images/refresh-circle.svg' className='refresh-all' /></a>
           <div className='site-name'>TrafficGlance</div>
+          <a href='#' className='refresh-all'><span className="glyphicon glyphicon-refresh" aria-hidden="true"></span></a>
         </div>
         <div className='container'>
           <div className='row' id='routes'>

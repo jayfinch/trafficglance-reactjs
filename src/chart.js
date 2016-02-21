@@ -6,7 +6,7 @@ var chartOptions = {
   animation: true,
   animateRotate: false,
   animateScale: true,
-  percentageInnerCutout: 70,
+  percentageInnerCutout: 75,
   animationSteps: 40,
   segmentShowStroke : false,
   showTooltips: false
@@ -41,7 +41,7 @@ var mockData = [
 
 var Chart = React.createClass({
   render: function () {
-    return <ChartJS.Doughnut data={mockData} options={chartOptions} width='150' height='150' className='img-responsive' />
+    return <ChartJS.Doughnut data={mockData} options={chartOptions} width='50' height='50' className='img-responsive' />
   }
 })
 
