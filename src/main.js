@@ -12,7 +12,7 @@ const store = configureStore()
 
 render(
   <Provider store={store}>
-    <App units='mi' />
+    <App />
   </Provider>,
   document.getElementById('app')
 )

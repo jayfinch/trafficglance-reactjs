@@ -13,21 +13,21 @@ class App extends Component {
   }
 
   render () {
-    const { locations, units } = this.props
+    const { commutes, units, actions, fetching } = this.props
 
-    var routes = <div className='loading'>
-                   Loading...
-                 </div>
+    var routes = <div className='loading'>Loading...</div>
 
-    if (locations.length) {
-      routes = locations.map(function (route, i) {
+    if (commutes.length) {
+      routes = commutes.map(function (route, i) {
         return (
         <Commute
           name={route.name}
           url={route.url}
           key={i}
           units={units}
-          actions={actions} />
+          fetchingTraffic={route.fetchingTraffic}
+          fetchTraffic={() => actions.fetchTraffic(i)}
+          trafficData={route.trafficData} />
         )
       })
     }
@@ -57,14 +57,15 @@ class App extends Component {
 }
 
 App.propTypes = {
-  locations: PropTypes.array,
+  commutes: PropTypes.array,
   units: PropTypes.string,
   actions: PropTypes.object
 }
 
 function mapStateToProps (state) {
   return {
-    locations: state.commutes.commutes
+    commutes: state.appData.commutes,
+    units: state.appData.units
   }
 }
 

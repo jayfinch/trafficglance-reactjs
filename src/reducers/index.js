@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
-import commutes from './commutes'
+import appData from './commutes'
 
 const rootReducer = combineReducers({
-  commutes
+  appData
 })
 
 export default rootReducer

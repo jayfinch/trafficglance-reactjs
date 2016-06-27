@@ -5,16 +5,10 @@ class Commute extends Component {
 
   constructor (props, context) {
     super(props, context)
-    this.state = {
-      travelDurationStats: false,
-      arriveTime: null,
-      distance: null,
-      minutes: null,
-      fetchingTraffic: false
-    }
   }
 
   render () {
+    const { trafficData, units } = this.props
     return (
       <div className='route col-sm-6 col-md-4'>
         <div className='card'>
@@ -25,19 +19,19 @@ class Commute extends Component {
           </div>
           <div className='row'>
             <div className='col-xs-5 col-sm-4 chart'>
-              <a href='#' title='Refresh' onClick={this.refreshTraffic.bind(this)}>
+              <a href='#' title='Refresh' onClick={this.props.fetchTraffic}>
                 {this._renderImage()}
               </a>
             </div>
             <div className='col-xs-7 col-sm-8 stats'>
               <div className='duration'>
-                <span className='nobreak'>{this.state.travelDurationStats ? <span className='nobreak'>{this.state.minutes}<span className='unit'>&nbsp;min</span></span> : '–––'}</span>
+                <span className='nobreak'>{trafficData ? <span className='nobreak'>{trafficData.minutes}<span className='unit'>&nbsp;min</span></span> : '–––'}</span>
               </div>
               <div className='detail'>
-                <span className='nobreak'>{this.state.travelDurationStats ? this.state.distance + ' ' + this.props.units : '–––'}</span>
+                <span className='nobreak'>{trafficData ? trafficData.distance + ' ' + units : '–––'}</span>
               </div>
               <div className='detail'>
-                <span className='nobreak'>{this.state.travelDurationStats ? this.state.arriveTime : '–––'}</span>
+                <span className='nobreak'>{trafficData ? trafficData.arriveTime : '–––'}</span>
               </div>
             </div>
           </div>
@@ -46,30 +40,10 @@ class Commute extends Component {
     )
   }
 
-  refreshTraffic () {
-    this.setState({
-      travelDurationStats: false,
-      arriveTime: null,
-      distance: null,
-      minutes: null,
-      fetchingTraffic: true
-    })
-
-    setTimeout(() => {
-      this.setState({
-        travelDurationStats: true,
-        arriveTime: '1:30 PM',
-        distance: '23.7',
-        minutes: 33,
-        fetchingTraffic: false
-      })
-    }, 1000)
-  }
-
   _renderImage () {
-    if (this.state.fetchingTraffic) {
+    if (this.props.fetchingTraffic) {
       return <img src='images/refresh-circle.svg' className='img-responsive center-block rotate' />
-    } else if (this.state.travelDurationStats) {
+    } else if (this.props.trafficData) {
       return <Chart />
     } else {
       return <img src='images/refresh-circle.svg' className='img-responsive center-block' />
@@ -79,7 +53,8 @@ class Commute extends Component {
 
 Commute.propTypes = {
   name: PropTypes.string,
-  units: PropTypes.string
+  units: PropTypes.string,
+  actions: PropTypes.object
 }
 
 export default Commute
