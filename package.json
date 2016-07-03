@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server --inline --content-base src/",
     "build": "webpack --define process.env.NODE_ENV=\\\"production\\\" -p -c --progress --devtool source-map",
-    "test": ""
+    "test": "karma start"
   },
   "author": "",
   "license": "ISC",
@@ -17,6 +17,7 @@
     "babel-preset-react": "^6.3.13",
     "bootstrap": "^3.3.6",
     "bootstrap-webpack": "0.0.5",
+    "chai": "^3.5.0",
     "chart.js": "^1.0.2",
     "css-loader": "^0.23.1",
     "exports-loader": "^0.6.3",
@@ -26,10 +27,18 @@
     "file-loader": "^0.8.5",
     "imports-loader": "^0.6.5",
     "jquery": "^2.2.0",
+    "karma": "^1.1.0",
+    "karma-chai": "^0.1.0",
+    "karma-mocha": "^1.1.1",
+    "karma-phantomjs-launcher": "^1.0.1",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-webpack": "^1.7.0",
     "less": "^2.6.0",
     "less-loader": "^2.2.2",
     "lodash": "^4.13.1",
+    "mocha": "^2.5.3",
     "moment": "^2.13.0",
+    "phantomjs": "^2.1.7",
     "react": "^15.1.0",
     "react-chartjs": "^0.7.3",
     "react-dom": "^15.1.0",
@@ -41,5 +50,13 @@
     "webpack": "^1.12.12",
     "webpack-dev-server": "^1.14.1",
     "whatwg-fetch": "^1.0.0"
+  },
+  "standard": {
+    "globals": [
+      "expect",
+      "describe",
+      "it",
+      "fetch"
+    ]
   }
 }
