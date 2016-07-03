@@ -1,5 +1,6 @@
 export default {
-  BOOTSTRAP: 'BOOTSTRAP',
-  REQUEST_TRAFFIC: 'REQUEST_TRAFFIC',
-  RECEIVE_TRAFFIC: 'RECEIVE_TRAFFIC'
+  REQUEST_CONFIG: 'request-config',
+  RECEIVE_CONFIG: 'receive-config',
+  REQUEST_TRAFFIC: 'request-traffic',
+  RECEIVE_TRAFFIC: 'receive-traffic'
 }

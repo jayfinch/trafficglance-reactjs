@@ -3,23 +3,34 @@ import Chart from './chart'
 
 class Commute extends Component {
 
-  constructor (props, context) {
-    super(props, context)
+  handleRefreshClick (event) {
+    event.preventDefault()
+    this.props.fetchTraffic()
+  }
+
+  _renderImage () {
+    if (this.props.fetchingTraffic) {
+      return <img src='images/refresh-circle.svg' className='img-responsive center-block rotate' />
+    } else if (this.props.trafficData) {
+      return <Chart />
+    } else {
+      return <img src='images/refresh-circle.svg' className='img-responsive center-block' />
+    }
   }
 
   render () {
-    const { trafficData, units } = this.props
+    const { name, url, trafficData, units } = this.props
     return (
       <div className='route col-sm-6 col-md-4'>
         <div className='card'>
           <div className='name'>
-            <a href='{this.props.url}' target='_blank'>
-              {this.props.name}
+            <a href={url} target='_blank'>
+              {name}
             </a>
           </div>
           <div className='row'>
             <div className='col-xs-5 col-sm-4 chart'>
-              <a href='#' title='Refresh' onClick={this.props.fetchTraffic}>
+              <a href='#' title='Refresh' onClick={this.handleRefreshClick.bind(this)}>
                 {this._renderImage()}
               </a>
             </div>
@@ -39,22 +50,15 @@ class Commute extends Component {
       </div>
     )
   }
-
-  _renderImage () {
-    if (this.props.fetchingTraffic) {
-      return <img src='images/refresh-circle.svg' className='img-responsive center-block rotate' />
-    } else if (this.props.trafficData) {
-      return <Chart />
-    } else {
-      return <img src='images/refresh-circle.svg' className='img-responsive center-block' />
-    }
-  }
 }
 
 Commute.propTypes = {
   name: PropTypes.string,
+  url: PropTypes.string,
   units: PropTypes.string,
-  actions: PropTypes.object
+  fetchingTraffic: PropTypes.bool,
+  fetchTraffic: PropTypes.func,
+  trafficData: PropTypes.object
 }
 
 export default Commute

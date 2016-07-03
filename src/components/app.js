@@ -3,17 +3,16 @@ import Commute from './commute'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as actions from '../actions'
+import 'whatwg-fetch'
 
 class App extends Component {
 
   componentDidMount () {
-    setTimeout(() => {
-      this.props.actions.bootstrap()
-    }, 500)
+    this.props.actions.fetchConfig()
   }
 
   render () {
-    const { commutes, units, actions, fetching } = this.props
+    const { actions, commutes, distanceUnit, apiKey } = this.props
 
     var routes = <div className='loading'>Loading...</div>
 
@@ -21,12 +20,12 @@ class App extends Component {
       routes = commutes.map(function (route, i) {
         return (
         <Commute
+          key={i}
           name={route.name}
           url={route.url}
-          key={i}
-          units={units}
+          units={distanceUnit}
           fetchingTraffic={route.fetchingTraffic}
-          fetchTraffic={() => actions.fetchTraffic(i)}
+          fetchTraffic={() => actions.fetchTraffic(i, distanceUnit, apiKey, route.segments)}
           trafficData={route.trafficData} />
         )
       })
@@ -38,7 +37,9 @@ class App extends Component {
           <div className='site-name'>
             TrafficGlance
           </div>
-          <a href='#' className='refresh-all'><span className='glyphicon glyphicon-refresh' aria-hidden='true'></span></a>
+          <a href='#' className='refresh-all'>
+            <span className='glyphicon glyphicon-refresh' aria-hidden='true'></span>
+          </a>
         </div>
         <div className='container'>
           <div className='row' id='routes'>
@@ -57,15 +58,17 @@ class App extends Component {
 }
 
 App.propTypes = {
+  actions: PropTypes.object,
   commutes: PropTypes.array,
-  units: PropTypes.string,
-  actions: PropTypes.object
+  distanceUnit: PropTypes.string,
+  apiKey: PropTypes.string
 }
 
 function mapStateToProps (state) {
   return {
     commutes: state.appData.commutes,
-    units: state.appData.units
+    apiKey: state.appData.apiKey,
+    distanceUnit: state.appData.distanceUnit
   }
 }
 

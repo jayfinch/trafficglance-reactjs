@@ -1,8 +1,17 @@
 import type from './constants'
+import _ from 'lodash'
+import fetchJsonp from 'fetch-jsonp'
 
-export function bootstrap () {
+export function requestConfig () {
   return {
-    type: type.BOOTSTRAP
+    type: type.REQUEST_CONFIG
+  }
+}
+
+export function receiveConfig (data) {
+  return {
+    type: type.RECEIVE_CONFIG,
+    data: data
   }
 }
 
@@ -22,22 +31,37 @@ export function receiveTraffic (id, trafficData) {
   }
 }
 
-export function fetchTraffic (id) {
+export function fetchConfig () {
+  return function (dispatch) {
+    dispatch(requestConfig())
+
+    return fetch('/config.json')
+    .then((response) => response.json())
+    .then((json) => dispatch(receiveConfig(json)))
+    .catch((ex) => console.log('fetchConfig failed', ex))
+  }
+}
+
+export function fetchTraffic (id, distanceUnit, apiKey, segments) {
   return function (dispatch) {
     dispatch(requestTraffic(id))
 
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve()
-      }, 1000)
-    }).then(() => {
-      dispatch(receiveTraffic(id, {
-        travelDurationStats: true,
-        arriveTime: '1:30 PM',
-        distance: '23.7',
-        minutes: 33,
-        fetchingTraffic: false
-      }))
+    let url = 'http://dev.virtualearth.net/REST/V1/Routes/Driving?&'
+    url += 'distanceUnit=' + distanceUnit + '&'
+
+    _.each(segments, function (segment, i) {
+      url += segment.waypointType + '.' + i + '=' +
+      segment.latitude + ',' +
+      segment.longitude + '&'
     })
+
+    url += 'key=' + apiKey
+
+    return fetchJsonp(url, {
+      jsonpCallback: 'jsonp'
+    })
+    .then((response) => response.json())
+    .then((json) => dispatch(receiveTraffic(id, json)))
+    .catch((ex) => console.log('fetchJsonp failed', ex))
   }
 }
