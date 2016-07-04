@@ -1,4 +1,4 @@
-import transformCommutes from './transform-commutes'
+import { transformCommutes } from './bing'
 
 describe('Commute data', () => {
   it('should be transformed', () => {

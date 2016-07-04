@@ -15,12 +15,14 @@ module.exports = function (config) {
       'karma-mocha',
       'karma-sourcemap-loader',
       'karma-webpack',
-      'karma-mocha-reporter'
+      'karma-mocha-reporter',
+      'karma-coverage'
     ],
     preprocessors: {
-      'tests.webpack.js': ['webpack', 'sourcemap']
+      'tests.webpack.js': ['webpack', 'sourcemap'],
+      '**/src/*.js': 'coverage'
     },
-    reporters: ['mocha'],
+    reporters: ['mocha', 'coverage'],
     webpack: webpackConfig,
     webpackMiddleware: {
       noInfo: true

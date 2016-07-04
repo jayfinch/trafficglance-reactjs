@@ -1,5 +1,4 @@
 import type from './constants'
-import _ from 'lodash'
 import fetchJsonp from 'fetch-jsonp'
 
 export function requestConfig () {

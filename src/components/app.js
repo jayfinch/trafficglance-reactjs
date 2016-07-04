@@ -3,7 +3,7 @@ import Commute from './commute'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as actions from '../actions'
-import _ from 'lodash'
+import { buildUrl } from '../utils/bing'
 import 'whatwg-fetch'
 
 class App extends Component {
@@ -12,43 +12,42 @@ class App extends Component {
     this.props.actions.fetchConfig()
   }
 
-  _fetchTraffic (i, segments) {
-    const { actions, distanceUnit, apiKey } = this.props
-    let url = 'http://dev.virtualearth.net/REST/V1/Routes/Driving?&'
-    url += 'distanceUnit=' + distanceUnit + '&'
-
-    _.each(segments, function (segment, i) {
-      url += segment.waypointType + '.' + i + '=' +
-      segment.latitude + ',' +
-      segment.longitude + '&'
-    })
-
-    url += 'key=' + apiKey
+  fetchCommuteTraffic (i, segments) {
+    const { distanceUnit, apiKey, actions } = this.props
+    const url = buildUrl(segments, distanceUnit, apiKey)
     actions.fetchTraffic(url, i)
   }
 
+  onClickRefreshAll (event) {
+    event.preventDefault()
+    this.props.commutes.forEach((commute, i) => {
+      this.fetchCommuteTraffic(i, commute.segments)
+    })
+  }
+
   render () {
-    const { commutes, distanceUnit, errorConfig } = this.props
+    const { commutes, distanceUnit, configError } = this.props
 
-    var routes = <div className='loading'>Loading...</div>
+    var commutesEl = <div className='loading'>Loading...</div>
 
-    if (errorConfig) {
-      routes = <div className='loading'>You must set up your config file</div>
+    if (configError) {
+      commutesEl = <div className='loading'>You must set up your config</div>
     }
 
     if (commutes.length) {
-      routes = commutes.map(function (route, i) {
+      commutesEl = commutes.map((commute, i) => {
         return (
         <Commute
           key={i}
-          name={route.name}
-          url={route.url}
+          name={commute.name}
+          url={commute.url}
           units={distanceUnit}
-          fetchingTraffic={route.fetchingTraffic}
-          fetchTraffic={() => this._fetchTraffic(i, route.segments)}
-          trafficData={route.trafficData} />
+          fetchingTraffic={commute.fetchingTraffic}
+          fetchTraffic={() => this.fetchCommuteTraffic(i, commute.segments)}
+          trafficData={commute.trafficData}
+          trafficError={commute.trafficError }/>
         )
-      }.bind(this))
+      })
     }
 
     return (
@@ -57,13 +56,13 @@ class App extends Component {
           <div className='site-name'>
             TrafficGlance
           </div>
-          <a href='#' className='refresh-all'>
+          <a href='#' className='refresh-all' onClick={this.onClickRefreshAll.bind(this)}>
             <span className='glyphicon glyphicon-refresh' aria-hidden='true'></span>
           </a>
         </div>
         <div className='container'>
           <div className='row' id='routes'>
-            {routes}
+            {commutesEl}
           </div>
           <div className='row credit'>
             <div className='col-xs-12'>
@@ -77,20 +76,27 @@ class App extends Component {
 }
 
 App.propTypes = {
-  actions: PropTypes.object,
-  commutes: PropTypes.array,
-  distanceUnit: PropTypes.string,
-  apiKey: PropTypes.string,
-  errorConfig: PropTypes.bool
+  actions: PropTypes.object.isRequired,
+  commutes: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string,
+    url: PropTypes.string.isRequired,
+    fetchingTraffic: PropTypes.bool,
+    trafficError: PropTypes.bool,
+    segments: PropTypes.arrayOf(PropTypes.shape({
+      waypointType: PropTypes.string.isRequired,
+      latitude: PropTypes.string.isRequired,
+      longitude: PropTypes.string.isRequired
+    })),
+    trafficData: PropTypes.object
+  })).isRequired,
+  distanceUnit: PropTypes.oneOf(['mi', 'km']).isRequired,
+  apiKey: PropTypes.string.isRequired,
+  configError: PropTypes.bool
 }
 
 function mapStateToProps (state) {
-  return {
-    commutes: state.appData.commutes,
-    apiKey: state.appData.apiKey,
-    distanceUnit: state.appData.distanceUnit,
-    errorConfig: state.appData.errorConfig
-  }
+  return {...state}
 }
 
 function mapDispatchToProps (dispatch) {
