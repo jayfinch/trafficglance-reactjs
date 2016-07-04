@@ -1,33 +1,33 @@
 import _ from 'lodash'
 
-export default function (dirtyRoutes) {
+export default function (oldRoutes) {
   const routeParameterRx = /&rtp=([^&]+)/
   const segmentInfoRx = /(\w*).([\d-.]+)_([\d-.]+)/
-  let cleanRoutes = []
+  let newRoutes = []
 
-  _.each(dirtyRoutes, function (dirtyRoute, i) {
-    const matches = routeParameterRx.exec(dirtyRoute.url)
+  _.each(oldRoutes, function (oldRoute, i) {
+    const matches = routeParameterRx.exec(oldRoute.url)
     const routeSegments = matches[1].split('~')
-    let cleanSegments = []
+    let newSegments = []
 
     _.each(routeSegments, function (segment) {
       const segmentInfo = segmentInfoRx.exec(segment)
       const waypointType = (segmentInfo[1] === 'pos') ? 'wp' : 'vwp'
 
-      cleanSegments.push({
+      newSegments.push({
         waypointType: waypointType,
         latitude: segmentInfo[2],
         longitude: segmentInfo[3]
       })
     })
 
-    cleanRoutes.push({
+    newRoutes.push({
       id: i,
-      name: dirtyRoute.name,
-      url: dirtyRoute.url,
-      segments: cleanSegments
+      name: oldRoute.name,
+      url: oldRoute.url,
+      segments: newSegments
     })
   })
 
-  return cleanRoutes
+  return newRoutes
 }

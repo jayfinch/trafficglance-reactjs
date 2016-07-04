@@ -3,6 +3,7 @@ import Commute from './commute'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as actions from '../actions'
+import _ from 'lodash'
 import 'whatwg-fetch'
 
 class App extends Component {
@@ -11,10 +12,29 @@ class App extends Component {
     this.props.actions.fetchConfig()
   }
 
+  _fetchTraffic (i, segments) {
+    const { actions, distanceUnit, apiKey } = this.props
+    let url = 'http://dev.virtualearth.net/REST/V1/Routes/Driving?&'
+    url += 'distanceUnit=' + distanceUnit + '&'
+
+    _.each(segments, function (segment, i) {
+      url += segment.waypointType + '.' + i + '=' +
+      segment.latitude + ',' +
+      segment.longitude + '&'
+    })
+
+    url += 'key=' + apiKey
+    actions.fetchTraffic(url, i)
+  }
+
   render () {
-    const { actions, commutes, distanceUnit, apiKey } = this.props
+    const { commutes, distanceUnit, errorConfig } = this.props
 
     var routes = <div className='loading'>Loading...</div>
+
+    if (errorConfig) {
+      routes = <div className='loading'>You must set up your config file</div>
+    }
 
     if (commutes.length) {
       routes = commutes.map(function (route, i) {
@@ -25,10 +45,10 @@ class App extends Component {
           url={route.url}
           units={distanceUnit}
           fetchingTraffic={route.fetchingTraffic}
-          fetchTraffic={() => actions.fetchTraffic(i, distanceUnit, apiKey, route.segments)}
+          fetchTraffic={() => this._fetchTraffic(i, route.segments)}
           trafficData={route.trafficData} />
         )
-      })
+      }.bind(this))
     }
 
     return (
@@ -54,21 +74,22 @@ class App extends Component {
       </div>
     )
   }
-
 }
 
 App.propTypes = {
   actions: PropTypes.object,
   commutes: PropTypes.array,
   distanceUnit: PropTypes.string,
-  apiKey: PropTypes.string
+  apiKey: PropTypes.string,
+  errorConfig: PropTypes.bool
 }
 
 function mapStateToProps (state) {
   return {
     commutes: state.appData.commutes,
     apiKey: state.appData.apiKey,
-    distanceUnit: state.appData.distanceUnit
+    distanceUnit: state.appData.distanceUnit,
+    errorConfig: state.appData.errorConfig
   }
 }
 

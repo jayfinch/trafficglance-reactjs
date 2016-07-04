@@ -4,22 +4,23 @@ webpackConfig.devtool = 'inline-source-map'
 module.exports = function (config) {
   config.set({
     browsers: ['PhantomJS'],
+    singleRun: true,
+    frameworks: ['chai', 'mocha'],
     files: [
       'tests.webpack.js'
     ],
-    frameworks: ['chai', 'mocha'],
     plugins: [
       'karma-phantomjs-launcher',
       'karma-chai',
       'karma-mocha',
       'karma-sourcemap-loader',
-      'karma-webpack'
+      'karma-webpack',
+      'karma-mocha-reporter'
     ],
     preprocessors: {
       'tests.webpack.js': ['webpack', 'sourcemap']
     },
-    reporters: ['dots'],
-    singleRun: true,
+    reporters: ['mocha'],
     webpack: webpackConfig,
     webpackMiddleware: {
       noInfo: true

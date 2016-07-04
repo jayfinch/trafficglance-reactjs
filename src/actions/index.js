@@ -15,6 +15,13 @@ export function receiveConfig (data) {
   }
 }
 
+export function failConfig (error) {
+  return {
+    type: type.FAIL_CONFIG,
+    error: error
+  }
+}
+
 export function requestTraffic (id) {
   return {
     type: type.REQUEST_TRAFFIC,
@@ -31,6 +38,16 @@ export function receiveTraffic (id, trafficData) {
   }
 }
 
+export function failTraffic (id, error) {
+  return {
+    type: type.FAIL_TRAFFIC,
+    id: id,
+    error: error
+  }
+}
+
+// async
+
 export function fetchConfig () {
   return function (dispatch) {
     dispatch(requestConfig())
@@ -38,30 +55,25 @@ export function fetchConfig () {
     return fetch('/config.json')
     .then((response) => response.json())
     .then((json) => dispatch(receiveConfig(json)))
-    .catch((ex) => console.log('fetchConfig failed', ex))
+    .catch((e) => dispatch(failConfig(e)))
   }
 }
 
-export function fetchTraffic (id, distanceUnit, apiKey, segments) {
+export function fetchTraffic (url, id) {
   return function (dispatch) {
     dispatch(requestTraffic(id))
-
-    let url = 'http://dev.virtualearth.net/REST/V1/Routes/Driving?&'
-    url += 'distanceUnit=' + distanceUnit + '&'
-
-    _.each(segments, function (segment, i) {
-      url += segment.waypointType + '.' + i + '=' +
-      segment.latitude + ',' +
-      segment.longitude + '&'
-    })
-
-    url += 'key=' + apiKey
 
     return fetchJsonp(url, {
       jsonpCallback: 'jsonp'
     })
     .then((response) => response.json())
-    .then((json) => dispatch(receiveTraffic(id, json)))
-    .catch((ex) => console.log('fetchJsonp failed', ex))
+    .then((json) => {
+      if (json.statusCode === 200) {
+        dispatch(receiveTraffic(id, json))
+      } else {
+        throw new Error('Problem with Bing data')
+      }
+    })
+    .catch((e) => dispatch(failTraffic(id, e)))
   }
 }

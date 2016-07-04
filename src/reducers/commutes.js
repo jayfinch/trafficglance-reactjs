@@ -13,26 +13,42 @@ export default function (state = initialState, action) {
     case type.RECEIVE_CONFIG:
       var data = action.data
       data.commutes = transformCommutes(action.data.commutes)
-      return Object.assign({}, state, data)
+      return {
+        ...state,
+        ...data
+      }
+
+    case type.FAIL_CONFIG:
+      return {
+        ...state,
+        errorConfig: true
+      }
 
     case type.REQUEST_TRAFFIC:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         commutes: state.commutes.map(commute =>
-          commute.id === action.id
-          ? Object.assign({}, commute, {
+          commute.id === action.id ? {
+            ...commute,
             trafficData: null,
             fetchingTraffic: true
-          })
+          }
           : commute
         )
-      })
+      }
 
     case type.RECEIVE_TRAFFIC:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         commutes: state.commutes.map(commute =>
-          commute.id === action.id ? Object.assign({}, commute, { trafficData: transformTraffic(action.trafficData), fetchingTraffic: false }) : commute
+          commute.id === action.id ? {
+            ...commute,
+            trafficData: transformTraffic(action.trafficData),
+            fetchingTraffic: false
+          }
+          : commute
         )
-      })
+      }
 
     default:
       return state

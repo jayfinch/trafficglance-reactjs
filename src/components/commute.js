@@ -8,18 +8,17 @@ class Commute extends Component {
     this.props.fetchTraffic()
   }
 
-  _renderImage () {
-    if (this.props.fetchingTraffic) {
-      return <img src='images/refresh-circle.svg' className='img-responsive center-block rotate' />
-    } else if (this.props.trafficData) {
-      return <Chart />
-    } else {
-      return <img src='images/refresh-circle.svg' className='img-responsive center-block' />
-    }
-  }
-
   render () {
     const { name, url, trafficData, units } = this.props
+
+    let renderImage = <img src='images/refresh-circle.svg' className='img-responsive center-block' />
+
+    if (this.props.fetchingTraffic) {
+      renderImage = <img src='images/refresh-circle.svg' className='img-responsive center-block rotate' />
+    } else if (this.props.trafficData) {
+      renderImage = <Chart />
+    }
+
     return (
       <div className='route col-sm-6 col-md-4'>
         <div className='card'>
@@ -31,7 +30,7 @@ class Commute extends Component {
           <div className='row'>
             <div className='col-xs-5 col-sm-4 chart'>
               <a href='#' title='Refresh' onClick={this.handleRefreshClick.bind(this)}>
-                {this._renderImage()}
+                {renderImage}
               </a>
             </div>
             <div className='col-xs-7 col-sm-8 stats'>
