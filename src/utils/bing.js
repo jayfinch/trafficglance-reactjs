@@ -44,18 +44,17 @@ export function transformCommutes (oldRoutes) {
   return newRoutes
 }
 
-export function transformTraffic (bingData) {
+export function transformTraffic (bingData, currentTime = new Date()) {
   let data = bingData.resourceSets[0].resources[0]
-
   const totalSeconds = data.travelDurationTraffic
-  var durationObj = moment.duration({seconds: totalSeconds})
-  var hoursNumber = durationObj.hours()
+  let durationObj = moment.duration({seconds: totalSeconds})
+  const hoursNumber = durationObj.hours()
+
   durationObj.subtract({hours: hoursNumber})
-  var minutesNumber = durationObj.minutes()
 
+  const minutesNumber = durationObj.minutes()
   const distance = Math.round(data.travelDistance * 10) / 10
-
-  var arriveTime = moment().add(totalSeconds, 's').format('h:mm a')
+  const arriveTime = moment(currentTime).add(totalSeconds, 's').format('h:mm a')
 
   return {
     hours: hoursNumber,
