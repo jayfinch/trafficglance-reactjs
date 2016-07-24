@@ -1,5 +1,5 @@
-import { transformCommutes, buildUrl, transformTraffic } from './bing'
-import mockResponse from './test-data'
+import { transformCommutes, buildUrl, transformTraffic } from '../../src/utils/bing'
+import mockResponse from './bing-response'
 
 describe('buildUrl', () => {
   it('should form bing traffic api request', () => {
@@ -27,7 +27,7 @@ describe('buildUrl', () => {
 })
 
 describe('transformCommutes', () => {
-  it('should parse config urls into clean model', () => {
+  it('should parse config urls into tree', () => {
     const dirtyData = [
       {
         'name': 'Disney World',

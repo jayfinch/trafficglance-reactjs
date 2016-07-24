@@ -9,10 +9,13 @@ import 'bootstrap-webpack'
 import './styles.less'
 
 const store = configureStore()
+const rootEl = document.getElementById('app')
 
-render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('app')
-)
+if (rootEl) {
+  render(
+    <Provider store={store}>
+      <App />
+    </Provider>,
+    rootEl
+  )
+}
