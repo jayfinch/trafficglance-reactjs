@@ -8,40 +8,60 @@ class Commute extends Component {
     this.props.fetchTraffic()
   }
 
-  render () {
-    const { name, url, trafficData, units, trafficError } = this.props
-
-    let renderImage = <img src='images/refresh-circle.svg' className='img-responsive center-block' />
-
-    if (this.props.fetchingTraffic) {
-      renderImage = <img src='images/refresh-circle.svg' className='img-responsive center-block rotate' />
-    } else if (this.props.trafficData) {
-      renderImage = <Chart />
+  getImage (fetchingTraffic, trafficData) {
+    if (fetchingTraffic) {
+      return <img
+          src='images/refresh-circle.svg'
+          className='img-responsive center-block rotate' />
+    } else if (trafficData) {
+      return <Chart />
+    } else {
+      return <img
+          src='images/refresh-circle.svg'
+          className='img-responsive center-block' />
     }
+  }
+
+  render () {
+    const {
+      name,
+      url,
+      trafficData,
+      units,
+      trafficError,
+      fetchingTraffic
+    } = this.props
 
     return (
       <div className='route col-sm-6 col-md-4'>
         <div className='card'>
           <div className='name'>
             <a href={url} target='_blank'>
-              {name}
+              {name}&nbsp;
             </a>
             {trafficError
-              ? <span className='glyphicon glyphicon-exclamation-sign pull-right' aria-hidden='true'></span>
+              ? <span
+                className='glyphicon glyphicon-exclamation-sign pull-right'
+                aria-hidden='true'></span>
               : ''
             }
           </div>
 
           <div className='row'>
             <div className='col-xs-5 col-sm-4 chart'>
-              <a href='#' title='Refresh' onClick={this.onClickRefresh.bind(this)}>
-                {renderImage}
-              </a>
+              <button
+                title='Refresh'
+                onClick={(e) => this.onClickRefresh(e)}
+                className='fetch-button'>
+                  {this.getImage(fetchingTraffic, trafficData)}
+              </button>
             </div>
             <div className='col-xs-7 col-sm-8 stats'>
               <div className='duration'>
                 <span className='nobreak'>{trafficData
-                  ? <span className='nobreak'>{trafficData.minutes}<span className='unit'>&nbsp;min</span></span>
+                  ? <span className='nobreak'>{trafficData.minutes}
+                      <span className='unit'>&nbsp;min</span>
+                    </span>
                   : '–––'}</span>
               </div>
               <div className='detail'>

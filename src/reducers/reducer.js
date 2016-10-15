@@ -1,5 +1,5 @@
 import type from '../actions/constants'
-import { transformCommutes, transformTraffic } from '../utils/bing'
+import { transformCommutes, transformTraffic } from '../utils/bing-helper'
 
 const initialState = {
   apiKey: 'no-key-defined',
@@ -9,7 +9,7 @@ const initialState = {
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case type.RECEIVE_CONFIG:
+    case type.FETCH_CONFIG_SUCCESS:
       var data = action.data
       data.commutes = transformCommutes(action.data.commutes)
       return {
@@ -17,13 +17,13 @@ export default function (state = initialState, action) {
         ...data
       }
 
-    case type.FAIL_CONFIG:
+    case type.FETCH_CONFIG_FAILURE:
       return {
         ...state,
         configError: true
       }
 
-    case type.REQUEST_TRAFFIC:
+    case type.FETCH_TRAFFIC_REQUEST:
       return {
         ...state,
         commutes: state.commutes.map(commute =>
@@ -37,7 +37,7 @@ export default function (state = initialState, action) {
         )
       }
 
-    case type.RECEIVE_TRAFFIC:
+    case type.FETCH_TRAFFIC_SUCCESS:
       return {
         ...state,
         commutes: state.commutes.map(commute =>
@@ -51,7 +51,7 @@ export default function (state = initialState, action) {
         )
       }
 
-    case type.FAIL_TRAFFIC:
+    case type.FETCH_TRAFFIC_FAILURE:
       return {
         ...state,
         commutes: state.commutes.map(commute =>

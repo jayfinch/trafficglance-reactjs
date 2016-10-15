@@ -1,5 +1,5 @@
-import { transformCommutes, buildUrl, transformTraffic } from '../../src/utils/bing'
-import mockResponse from './bing-response'
+import { transformCommutes, buildUrl, transformTraffic } from './bing-helper'
+import mockResponse from '../../test/bing-response'
 
 describe('buildUrl', () => {
   it('should form bing traffic api request', () => {

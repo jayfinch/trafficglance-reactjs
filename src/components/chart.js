@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Doughnut } from 'react-chartjs'
 
-var chartOptions = {
+const chartOptions = {
   animation: true,
   animateRotate: false,
   animateScale: true,
@@ -11,7 +11,7 @@ var chartOptions = {
   showTooltips: false
 }
 
-var data = {
+const data = {
   seriousCongestion: 10,
   moderateCongestion: 5,
   lowCongestion: 2,
@@ -19,7 +19,7 @@ var data = {
   showTooltips: false
 }
 
-var mockData = [
+const mockData = [
   {
     value: data.seriousCongestion,
     color: '#e01e1b'
@@ -41,11 +41,11 @@ var mockData = [
 class Chart extends Component {
   render () {
     return <Doughnut
-             data={mockData}
-             options={chartOptions}
-             width='90'
-             height='90'
-             className='img-responsive' />
+      data={mockData}
+      options={chartOptions}
+      width='90'
+      height='90'
+      className='img-responsive' />
   }
 }
 

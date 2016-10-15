@@ -1,23 +1,31 @@
-var path = require('path')
+'use strict'
+let path = require('path')
 
 module.exports = {
   entry: {
     main: './src/main.js'
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    publicPath: '/',
-    filename: '[name].bundle.js',
-    sourcemapFilename: '[name].bundle.js.map'
+    path: path.join(__dirname, 'dist'),
+    filename: '[name].bundle.js'
   },
+  devtool: 'cheap-source-map',
   module: {
+    noParse: ['react'],
     loaders: [
-      {test: /src\/.+.js$/, exclude: /node_modules/, loader: 'babel'},
-      {test: /\.less$/, loader: 'style!css!less'},
-      {test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/font-woff'},
-      {test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/octet-stream'},
-      {test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file'},
-      {test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=image/svg+xml'}
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel',
+        query: {
+          presets: ['es2015', 'react'],
+          plugins: ['transform-object-rest-spread']
+        }
+      },
+      {
+        test: /\.less$/,
+        loader: 'style!css!less'
+      }
     ]
   }
 }

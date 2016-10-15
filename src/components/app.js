@@ -2,8 +2,8 @@ import React, { Component, PropTypes } from 'react'
 import Commute from './commute'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import * as actions from '../actions'
-import { buildUrl } from '../utils/bing'
+import * as actions from '../actions/actions'
+import { buildUrl } from '../utils/bing-helper'
 import 'whatwg-fetch'
 
 class App extends Component {
@@ -56,9 +56,9 @@ class App extends Component {
           <div className='site-name'>
             TrafficGlance
           </div>
-          <a href='#' className='refresh-all' onClick={this.onClickRefreshAll.bind(this)}>
-            <span className='glyphicon glyphicon-refresh' aria-hidden='true'></span>
-          </a>
+          <button className='refresh-all' onClick={this.onClickRefreshAll.bind(this)}>
+            Refresh All
+          </button>
         </div>
         <div className='container'>
           <div className='row' id='routes'>

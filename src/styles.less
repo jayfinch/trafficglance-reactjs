@@ -3,14 +3,8 @@
 body {
   background: #f2f2f2;
   color: #333;
-  font-size: 14px;
+  font-size: 13px;
   line-height: 1.2;
-  font-family: "AvenirNext-Regular", Helvetica, Arial, sans-serif
-}
-
-a:hover, a:active {
-  color: #000;
-  text-decoration: none;
 }
 
 .container {
@@ -45,16 +39,19 @@ a:hover, a:active {
 
   .site-name {
     padding-top: 14px;
-    font-size: 18px;
+    font-size: 16px;
   }
 
   .refresh-all {
     position: absolute;
-    top: 17px;
+    top: 14px;
     right: 15px;
-    text-transform: uppercase;
-    font-size: 16px;
-    font-weight: bold;
+    border: none;
+    padding: none;
+    margin: none;
+    background: none;
+    font-size: 14px;
+    color: #337ab7;
   }
 }
 
@@ -75,10 +72,18 @@ a:hover, a:active {
     margin-bottom: 15px;
     border-bottom: solid 1px rgba(0,0,0,.15);
     padding: 0 15px 15px 15px;
-    text-transform: uppercase;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: bold;
     margin: 0 -15px 15px -15px;
+  }
+
+  .fetch-button {
+    border: none;
+    margin: 0;
+    padding: 0;
+    background: none;
+    display: block;
+    width: 100%;
   }
 
   // stats
@@ -88,11 +93,11 @@ a:hover, a:active {
   }
 
   .duration {
-    font-size: 45px;
+    font-size: 40px;
   }
 
   .detail, .unit {
-    font-size: 18px;
+    font-size: 16px;
     color: #999;
   }
 

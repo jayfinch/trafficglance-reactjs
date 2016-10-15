@@ -1,8 +1,8 @@
 export default {
-  REQUEST_CONFIG: 'request-config',
-  RECEIVE_CONFIG: 'receive-config',
-  FAIL_CONFIG: 'fail-config',
-  REQUEST_TRAFFIC: 'request-traffic',
-  RECEIVE_TRAFFIC: 'receive-traffic',
-  FAIL_TRAFFIC: 'fail-traffic'
+  FETCH_CONFIG_REQUEST: 'fetch-config-requested',
+  FETCH_CONFIG_SUCCESS: 'fetch-config-success',
+  FETCH_CONFIG_FAILURE: 'fetch-config-failure',
+  FETCH_TRAFFIC_REQUEST: 'fetch-traffic-request',
+  FETCH_TRAFFIC_SUCCESS: 'fetch-traffic-success',
+  FETCH_TRAFFIC_FAILURE: 'fetch-traffic-failure'
 }
