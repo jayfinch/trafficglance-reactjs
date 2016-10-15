@@ -1,5 +1,7 @@
 import type from './constants'
 import fetchJsonp from 'fetch-jsonp'
+import { transformCommutes } from '../utils/commutes-helper'
+import { transformTraffic } from '../utils/traffic-helper'
 
 // fetch config
 
@@ -22,14 +24,16 @@ export function fetchConfigRequest () {
 export function fetchConfigSuccess (data) {
   return {
     type: type.FETCH_CONFIG_SUCCESS,
-    data: data
+    apiKey: data.apiKey,
+    distanceUnit: data.distanceUnit,
+    commutes: transformCommutes(data.commutes)
   }
 }
 
 export function fetchConfigFailure (error) {
   return {
     type: type.FETCH_CONFIG_FAILURE,
-    error: error
+    error: error.message
   }
 }
 
@@ -66,7 +70,7 @@ export function fetchTrafficSuccess (id, trafficData) {
   return {
     type: type.FETCH_TRAFFIC_SUCCESS,
     id: id,
-    trafficData: trafficData
+    trafficData: transformTraffic(trafficData)
   }
 }
 
@@ -74,6 +78,6 @@ export function fetchTrafficFailure (id, error) {
   return {
     type: type.FETCH_TRAFFIC_FAILURE,
     id: id,
-    error: error
+    error: error.message
   }
 }

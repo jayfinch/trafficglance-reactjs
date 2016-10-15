@@ -10,14 +10,20 @@ class Commute extends Component {
   getImage (fetchingTraffic, trafficData) {
     if (fetchingTraffic) {
       return <img
-          src='images/refresh-circle.svg'
-          className='img-responsive center-block rotate' />
+        src='images/refresh-circle.svg'
+        className='img-responsive center-block rotate' />
     } else if (trafficData) {
-      return <Chart />
+      const data = {
+        durationSeriousCongestion: trafficData.durationSeriousCongestion,
+        durationModerateCongestion: trafficData.durationModerateCongestion,
+        durationLowCongestion: trafficData.durationLowCongestion,
+        durationNoCongestion: trafficData.durationNoCongestion
+      }
+      return <Chart data={data} />
     } else {
       return <img
-          src='images/refresh-circle.svg'
-          className='img-responsive center-block' />
+        src='images/refresh-circle.svg'
+        className='img-responsive center-block' />
     }
   }
 
@@ -36,7 +42,7 @@ class Commute extends Component {
         <div className='card'>
           <div className='name'>
             <a href={url} target='_blank'>
-              {name}&nbsp;
+              {name || 'Your Commute'}
             </a>
             {trafficError
               ? <span

@@ -1,5 +1,4 @@
 import type from '../actions/constants'
-import { transformCommutes, transformTraffic } from '../utils/bing-helper'
 
 const initialState = {
   apiKey: 'no-key-defined',
@@ -9,12 +8,13 @@ const initialState = {
 
 export default function (state = initialState, action) {
   switch (action.type) {
+
     case type.FETCH_CONFIG_SUCCESS:
-      var data = action.data
-      data.commutes = transformCommutes(action.data.commutes)
       return {
         ...state,
-        ...data
+        apiKey: action.apiKey,
+        distanceUnit: action.distanceUnit,
+        commutes: action.commutes
       }
 
     case type.FETCH_CONFIG_FAILURE:
@@ -43,7 +43,7 @@ export default function (state = initialState, action) {
         commutes: state.commutes.map(commute =>
           commute.id === action.id ? {
             ...commute,
-            trafficData: transformTraffic(action.trafficData),
+            trafficData: action.trafficData,
             fetchingTraffic: false,
             trafficError: false
           }
