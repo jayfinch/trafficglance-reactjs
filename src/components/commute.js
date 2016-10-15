@@ -3,8 +3,7 @@ import Chart from './chart'
 
 class Commute extends Component {
 
-  onClickRefresh (event) {
-    event.preventDefault()
+  onClickRefresh () {
     this.props.fetchTraffic()
   }
 

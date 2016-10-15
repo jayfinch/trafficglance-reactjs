@@ -22,12 +22,13 @@ module.exports = function (config) {
       'karma-sourcemap-loader',
       'karma-webpack',
       'karma-mocha-reporter',
-      'karma-coverage'
+      'karma-coverage',
+      'karma-threshold-reporter'
     ],
     preprocessors: {
       'tests.webpack.js': ['webpack', 'sourcemap']
     },
-    reporters: ['mocha', 'coverage'],
+    reporters: ['mocha', 'coverage', 'threshold'],
     webpack: webpackConfig,
     webpackServer: {
       noInfo: true
