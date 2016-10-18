@@ -1,17 +1,6 @@
 import moment from 'moment'
 import _ from 'lodash'
 
-export function transformTraffic (bingData) {
-  const subTree = getSubTree(bingData)
-
-  return {
-    ...getDurationTime(subTree),
-    ...getDurationByCongestion(subTree),
-    distance: getDistance(subTree),
-    arriveTime: getArriveTime(subTree)
-  }
-}
-
 export function getSubTree (bingData) {
   return bingData.resourceSets[0].resources[0]
 }

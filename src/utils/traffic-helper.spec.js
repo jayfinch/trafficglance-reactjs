@@ -12,7 +12,7 @@ describe('trafficHelper', () => {
   })
 
   describe('getDistance', () => {
-    it('Should return mi/km', () => {
+    it('Should return mi/km value', () => {
       const data = trafficHelper.getSubTree(mockResponse)
       const result = trafficHelper.getDistance(data)
       expect(result).to.equal(23.7)

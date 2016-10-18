@@ -1,18 +1,18 @@
 import type from './constants'
 import fetchJsonp from 'fetch-jsonp'
-import { transformCommutes } from '../utils/commutes-helper'
-import { transformTraffic } from '../utils/traffic-helper'
+import * as commutesHelper from '../utils/commutes-helper'
+import * as trafficHelper from '../utils/traffic-helper'
 
-// fetch config
+// fetchConfig
 
-export function fetchConfig () {
+export function fetchConfig (uri = '/config.json') {
   return function (dispatch) {
     dispatch(fetchConfigRequest())
 
-    return fetch('/config.json')
+    return fetch(uri)
     .then((response) => response.json())
     .then((json) => dispatch(fetchConfigSuccess(json)))
-    .catch((e) => dispatch(fetchConfigFailure(e)))
+    .catch((e) => dispatch(fetchConfigFailure(e.message)))
   }
 }
 export function fetchConfigRequest () {
@@ -26,18 +26,18 @@ export function fetchConfigSuccess (data) {
     type: type.FETCH_CONFIG_SUCCESS,
     apiKey: data.apiKey,
     distanceUnit: data.distanceUnit,
-    commutes: transformCommutes(data.commutes)
+    commutes: commutesHelper.transformCommutes(data.commutes)
   }
 }
 
-export function fetchConfigFailure (error) {
+export function fetchConfigFailure (message) {
   return {
     type: type.FETCH_CONFIG_FAILURE,
-    error: error.message
+    error: message
   }
 }
 
-// fetch traffic
+// fetchTraffic
 
 export function fetchTraffic (url, id) {
   return function (dispatch) {
@@ -54,7 +54,7 @@ export function fetchTraffic (url, id) {
         throw new Error('Problem with Bing data')
       }
     })
-    .catch((e) => dispatch(fetchTrafficFailure(id, e)))
+    .catch((e) => dispatch(fetchTrafficFailure(id, e.message)))
   }
 }
 
@@ -66,18 +66,25 @@ export function fetchTrafficRequest (id) {
   }
 }
 
-export function fetchTrafficSuccess (id, trafficData) {
+export function fetchTrafficSuccess (id, bingData) {
+  const subTree = trafficHelper.getSubTree(bingData)
+
   return {
     type: type.FETCH_TRAFFIC_SUCCESS,
     id: id,
-    trafficData: transformTraffic(trafficData)
+    trafficData: {
+      ...trafficHelper.getDurationTime(subTree),
+      ...trafficHelper.getDurationByCongestion(subTree),
+      distance: trafficHelper.getDistance(subTree),
+      arriveTime: trafficHelper.getArriveTime(subTree)
+    }
   }
 }
 
-export function fetchTrafficFailure (id, error) {
+export function fetchTrafficFailure (id, message) {
   return {
     type: type.FETCH_TRAFFIC_FAILURE,
     id: id,
-    error: error.message
+    error: message
   }
 }
