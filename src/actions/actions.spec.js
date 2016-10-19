@@ -23,7 +23,7 @@ describe('actions', () => {
       const expected = {
         type: type.FETCH_CONFIG_REQUEST
       }
-      expect(actual).to.deep.equal(expected)
+      expect(actual).toEqual(expected)
     })
   })
 
@@ -47,8 +47,8 @@ describe('actions', () => {
 
       const actual = actions.fetchConfigSuccess(data)
 
-      expect(actual).to.deep.equal(expected)
-      expect(commutesHelper.transformCommutes.calledWith(commute)).to.be.true
+      expect(actual).toEqual(expected)
+      expect(commutesHelper.transformCommutes.calledWith(commute)).toEqual(true)
     })
   })
 
@@ -59,7 +59,7 @@ describe('actions', () => {
         type: type.FETCH_CONFIG_FAILURE,
         error: 'foo'
       }
-      expect(actual).to.deep.equal(expected)
+      expect(actual).toEqual(expected)
     })
   })
 
@@ -73,7 +73,7 @@ describe('actions', () => {
         id: 'foo',
         isFetching: false
       }
-      expect(actual).to.deep.equal(expected)
+      expect(actual).toEqual(expected)
     })
   })
 
@@ -117,8 +117,8 @@ describe('actions', () => {
 
       const actual = actions.fetchTrafficSuccess('foo-id', bingData)
 
-      expect(actual).to.deep.equal(expected)
-      expect(trafficHelper.getSubTree.calledWith(bingData)).to.be.true
+      expect(actual).toEqual(expected)
+      expect(trafficHelper.getSubTree.calledWith(bingData)).toEqual(true)
     })
   })
 
@@ -130,7 +130,7 @@ describe('actions', () => {
         id: 'foo',
         error: 'bar'
       }
-      expect(actual).to.deep.equal(expected)
+      expect(actual).toEqual(expected)
     })
   })
 })

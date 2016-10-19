@@ -9,7 +9,7 @@ describe('reducer', () => {
         configError: true
       })
 
-      expect(state).to.deep.equal({
+      expect(state).toEqual({
         configError: true
       })
     })

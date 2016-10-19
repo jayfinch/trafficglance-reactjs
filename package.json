@@ -10,19 +10,20 @@
   "scripts": {
     "start": "webpack-dev-server --progress --inline --hot --content-base src/",
     "build": "webpack --define process.env.NODE_ENV=\\\"production\\\" -p -c --progress --devtool source-map",
-    "test": "karma start --single-run",
-    "test:ci": "karma start --auto-watch",
+    "test": "jest",
+    "test:ci": "jest --watch",
+    "test:coverage": "jest --coverage",
     "lint": "eslint \"src/**/*.js\""
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "babel-core": "6.17.0",
+    "babel-jest": "16.0.0",
     "babel-loader": "6.2.5",
     "babel-plugin-transform-object-rest-spread": "6.16.0",
     "babel-preset-es2015": "6.16.0",
     "babel-preset-react": "6.16.0",
-    "chai": "3.5.0",
     "chart.js": "1.0.2",
     "css-loader": "0.25.0",
     "enzyme": "2.5.1",
@@ -30,23 +31,12 @@
     "eslint-plugin-react": "6.4.1",
     "eslint-plugin-standard": "2.0.1",
     "fetch-jsonp": "1.0.2",
-    "istanbul-instrumenter-loader": "0.2.0",
+    "jest": "16.0.1",
     "json-loader": "0.5.4",
-    "karma": "1.3.0",
-    "karma-chai": "0.1.0",
-    "karma-coverage": "1.1.1",
-    "karma-mocha": "1.2.0",
-    "karma-mocha-reporter": "2.2.0",
-    "karma-phantomjs-launcher": "1.0.2",
-    "karma-sourcemap-loader": "0.3.7",
-    "karma-threshold-reporter": "0.1.15",
-    "karma-webpack": "1.8.0",
     "less": "2.7.1",
     "less-loader": "2.2.3",
     "lodash": "^4.16.4",
-    "mocha": "3.1.2",
     "moment": "2.15.1",
-    "phantomjs-prebuilt": "2.1.13",
     "pre-push": "0.1.1",
     "react": "15.3.2",
     "react-addons-test-utils": "15.3.2",
@@ -59,8 +49,7 @@
     "standard": "8.4.0",
     "style-loader": "0.13.1",
     "webpack": "2.1.0-beta.22",
-    "webpack-dev-server": "2.1.0-beta.8",
-    "whatwg-fetch": "1.0.0"
+    "webpack-dev-server": "2.1.0-beta.8"
   },
   "standard": {
     "globals": [
@@ -69,5 +58,12 @@
       "it",
       "fetch"
     ]
+  },
+  "jest": {
+    "collectCoverageFrom": ["src/**/*.js"],
+    "moduleNameMapper": {
+       "^.+\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/test/file-mock.js",
+      "^.+\\.(css|less)$": "<rootDir>/test/style-mock.js"
+    }
   }
 }

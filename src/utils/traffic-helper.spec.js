@@ -6,8 +6,8 @@ describe('trafficHelper', () => {
     it('Should return hours & minutes', () => {
       const data = trafficHelper.getSubTree(mockResponse)
       const result = trafficHelper.getDurationTime(data)
-      expect(result.hours).to.equal(0)
-      expect(result.minutes).to.equal(35)
+      expect(result.hours).toEqual(0)
+      expect(result.minutes).toEqual(35)
     })
   })
 
@@ -15,7 +15,7 @@ describe('trafficHelper', () => {
     it('Should return mi/km value', () => {
       const data = trafficHelper.getSubTree(mockResponse)
       const result = trafficHelper.getDistance(data)
-      expect(result).to.equal(23.7)
+      expect(result).toEqual(23.7)
     })
   })
 
@@ -24,7 +24,7 @@ describe('trafficHelper', () => {
       const currentTime = new Date(2016, 1, 1, 1, 0, 0)
       const data = trafficHelper.getSubTree(mockResponse)
       const result = trafficHelper.getArriveTime(data, currentTime)
-      expect(result).to.equal('1:35 am')
+      expect(result).toEqual('1:35 am')
     })
   })
 })

@@ -16,15 +16,15 @@ describe('commutesHelper', () => {
 
       let cleanData = transformCommutes(dirtyData)
 
-      expect(cleanData.length).to.equal(2)
-      expect(cleanData[0].id).to.equal(0)
-      expect(cleanData[0].name).to.equal('Disney World')
-      expect(cleanData[0].url).to.equal('http://www.bing.com/maps/?v=2&cp=28.408043~-81.442907&lvl=11&dir=0&sty=r&rtp=pos.28.432114_-81.308201_1%20Jeff%20Fuqua%20Blvd%2C%20Orlando%2C%20FL_Orlando%20International%20Airport_(407)%20825-8463_e_YN873x128112508~pos.28.404329_-81.580612_Walt%20Disney%20World%20Resort%2C%20FL___e_&mode=D&rtop=0~0~0~&form=LMLTCC')
+      expect(cleanData.length).toEqual(2)
+      expect(cleanData[0].id).toEqual(0)
+      expect(cleanData[0].name).toEqual('Disney World')
+      expect(cleanData[0].url).toEqual('http://www.bing.com/maps/?v=2&cp=28.408043~-81.442907&lvl=11&dir=0&sty=r&rtp=pos.28.432114_-81.308201_1%20Jeff%20Fuqua%20Blvd%2C%20Orlando%2C%20FL_Orlando%20International%20Airport_(407)%20825-8463_e_YN873x128112508~pos.28.404329_-81.580612_Walt%20Disney%20World%20Resort%2C%20FL___e_&mode=D&rtop=0~0~0~&form=LMLTCC')
 
-      expect(cleanData[0].segments.length).to.equal(2)
-      expect(cleanData[0].segments[0].waypointType).to.equal('wp')
-      expect(cleanData[0].segments[0].latitude).to.equal('28.432114')
-      expect(cleanData[0].segments[0].longitude).to.equal('-81.308201')
+      expect(cleanData[0].segments.length).toEqual(2)
+      expect(cleanData[0].segments[0].waypointType).toEqual('wp')
+      expect(cleanData[0].segments[0].latitude).toEqual('28.432114')
+      expect(cleanData[0].segments[0].longitude).toEqual('-81.308201')
     })
   })
 })

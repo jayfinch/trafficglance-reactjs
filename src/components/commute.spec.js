@@ -15,8 +15,8 @@ describe('<Commute />', () => {
 
       const wrapper = shallow(component)
 
-      expect(wrapper.find('.name').text().trim()).to.equal('foo')
-      expect(wrapper.find('a').props().href).to.equal('http://foo.com')
+      expect(wrapper.find('.name').text().trim()).toEqual('foo')
+      expect(wrapper.find('a').props().href).toEqual('http://foo.com')
     })
 
     it('Should handle clicking refresh', () => {
@@ -31,7 +31,7 @@ describe('<Commute />', () => {
       const wrapper = shallow(component)
       wrapper.find('button').simulate('click')
 
-      expect(onButtonClick).to.have.property('callCount', 1)
+      expect(onButtonClick.callCount).toEqual(1)
     })
   })
 })
