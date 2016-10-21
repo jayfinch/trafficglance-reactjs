@@ -1,136 +1,125 @@
 import * as actions from './actions'
-import * as trafficHelper from './../utils/traffic-helper'
 import * as commutesHelper from './../utils/commutes-helper'
-import sinon from 'sinon'
 import type from './constants'
+import configureMockStore from 'redux-mock-store'
+import thunk from 'redux-thunk'
+
+jest.mock('../utils/commutes-helper.js')
+jest.mock('../utils/traffic-helper.js')
+jest.mock('fetch-jsonp')
+
+const middlewares = [ thunk ]
+const mockStore = configureMockStore(middlewares)
 
 describe('actions', () => {
-  let sandbox
-
-  beforeEach(() => {
-    sandbox = sinon.sandbox.create()
-  })
-
-  afterEach(() => {
-    sandbox.restore()
-  })
-
   // fetchConfig
 
-  describe('fetchConfigRequest', () => {
-    it('Should return expected properties', () => {
-      const actual = actions.fetchConfigRequest()
-      const expected = {
-        type: type.FETCH_CONFIG_REQUEST
-      }
-      expect(actual).toEqual(expected)
-    })
-  })
-
-  describe('fetchConfigSuccess', () => {
-    it('Should return expected properties', () => {
-      sandbox.stub(commutesHelper, 'transformCommutes', () => 'bar-transformed')
-
+  describe('fetchConfig', () => {
+    it('Should handle success', () => {
       const commute = 'baz'
-      const data = {
-        apiKey: 'foo',
-        distanceUnit: 'bar',
-        commutes: commute
+      const response = {
+        'apiKey': 'foo',
+        'distanceUnit': 'bar',
+        'commutes': commute
       }
+      fetch.mockResponseOnce(JSON.stringify(response), {status: 200})
 
-      const expected = {
-        type: type.FETCH_CONFIG_SUCCESS,
-        apiKey: 'foo',
-        distanceUnit: 'bar',
-        commutes: 'bar-transformed'
-      }
+      const expectedActions = [
+        {
+          type: type.FETCH_CONFIG_REQUEST
+        },
+        {
+          type: type.FETCH_CONFIG_SUCCESS,
+          apiKey: 'foo',
+          distanceUnit: 'bar',
+          commutes: 'baz-transformed'
+        }
 
-      const actual = actions.fetchConfigSuccess(data)
+      ]
+      const store = mockStore()
 
-      expect(actual).toEqual(expected)
-      expect(commutesHelper.transformCommutes.calledWith(commute)).toEqual(true)
+      return store.dispatch(actions.fetchConfig())
+        .then(() => {
+          expect(store.getActions()).toEqual(expectedActions)
+          expect(commutesHelper.transformCommutes).toHaveBeenCalledWith(commute)
+        })
     })
-  })
 
-  describe('fetchConfigFailure', () => {
-    it('Should return expected properties', () => {
-      const actual = actions.fetchConfigFailure('foo')
-      const expected = {
-        type: type.FETCH_CONFIG_FAILURE,
-        error: 'foo'
-      }
-      expect(actual).toEqual(expected)
+    it('Should handle failure', () => {
+      fetch.mockResponseOnce('', {status: 400, statusText: 'foo'})
+
+      const expectedActions = [
+        {
+          type: type.FETCH_CONFIG_REQUEST
+        },
+        {
+          type: type.FETCH_CONFIG_FAILURE,
+          error: 'foo'
+        }
+
+      ]
+      const store = mockStore()
+
+      return store.dispatch(actions.fetchConfig())
+        .then(() => {
+          expect(store.getActions()).toEqual(expectedActions)
+        })
     })
   })
 
   // fetchTraffic
 
-  describe('fetchTrafficRequest', () => {
-    it('Should return expected properties', () => {
-      const actual = actions.fetchTrafficRequest('foo', 'bar')
-      const expected = {
+  describe('fetchTraffic', () => {
+    it('Should handle success', () => {
+      const expectedActions = [
+        {
+          type: type.FETCH_TRAFFIC_REQUEST,
+          id: 'foo-id'
+        },
+        {
+          type: type.FETCH_TRAFFIC_SUCCESS,
+          id: 'foo-id',
+          trafficData: {
+            distance: 'a',
+            arriveTime: 'b',
+            hours: 'c',
+            minutes: 'd',
+            durationNoCongestion: 'e',
+            durationLowCongestion: 'f',
+            durationModerateCongestion: 'g',
+            durationSeriousCongestion: 'h',
+            travelWarnings: 'i'
+          }
+        }
+
+      ]
+      const store = mockStore()
+
+      return store.dispatch(actions.fetchTraffic('success-url', 'foo-id'))
+        .then(() => {
+          expect(store.getActions()).toEqual(expectedActions)
+        })
+    })
+  })
+
+  it('Should handle failure', () => {
+    const expectedActions = [
+      {
         type: type.FETCH_TRAFFIC_REQUEST,
-        id: 'foo',
-        isFetching: false
-      }
-      expect(actual).toEqual(expected)
-    })
-  })
-
-  describe('fetchTrafficSuccess', () => {
-    it('Should return expected properties', () => {
-      const bingData = {}
-      sandbox.stub(trafficHelper, 'getSubTree')
-      sandbox.stub(trafficHelper, 'getDistance', () => 'a')
-      sandbox.stub(trafficHelper, 'getArriveTime', () => 'b')
-      sandbox.stub(trafficHelper, 'getDurationTime', () => {
-        return {
-          hours: 'c',
-          minutes: 'd'
-        }
-      })
-      sandbox.stub(trafficHelper, 'getDurationByCongestion', () => {
-        return {
-          durationNoCongestion: 'e',
-          durationLowCongestion: 'f',
-          durationModerateCongestion: 'g',
-          durationSeriousCongestion: 'h',
-          travelWarnings: 'i'
-        }
-      })
-
-      const expected = {
-        type: type.FETCH_TRAFFIC_SUCCESS,
-        id: 'foo-id',
-        trafficData: {
-          distance: 'a',
-          arriveTime: 'b',
-          hours: 'c',
-          minutes: 'd',
-          durationNoCongestion: 'e',
-          durationLowCongestion: 'f',
-          durationModerateCongestion: 'g',
-          durationSeriousCongestion: 'h',
-          travelWarnings: 'i'
-        }
-      }
-
-      const actual = actions.fetchTrafficSuccess('foo-id', bingData)
-
-      expect(actual).toEqual(expected)
-      expect(trafficHelper.getSubTree.calledWith(bingData)).toEqual(true)
-    })
-  })
-
-  describe('fetchTrafficFailure', () => {
-    it('Should return expected properties', () => {
-      const actual = actions.fetchTrafficFailure('foo', 'bar')
-      const expected = {
+        id: 'foo-id'
+      },
+      {
         type: type.FETCH_TRAFFIC_FAILURE,
-        id: 'foo',
-        error: 'bar'
+        error: 'bad-response',
+        id: 'foo-id'
       }
-      expect(actual).toEqual(expected)
-    })
+
+    ]
+    const store = mockStore()
+
+    return store.dispatch(actions.fetchTraffic('fail-url', 'foo-id'))
+      .then(() => {
+        expect(store.getActions()).toEqual(expectedActions)
+      })
   })
 })

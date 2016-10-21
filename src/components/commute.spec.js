@@ -1,7 +1,6 @@
 import React from 'react'
 import Commute from './commute'
 import {shallow} from 'enzyme'
-import sinon from 'sinon'
 
 describe('<Commute />', () => {
   describe('render', () => {
@@ -20,7 +19,7 @@ describe('<Commute />', () => {
     })
 
     it('Should handle clicking refresh', () => {
-      const onButtonClick = sinon.spy()
+      const onButtonClick = jest.fn()
       let component = <Commute
         name='foo'
         url='http://foo.com'
@@ -31,7 +30,7 @@ describe('<Commute />', () => {
       const wrapper = shallow(component)
       wrapper.find('button').simulate('click')
 
-      expect(onButtonClick.callCount).toEqual(1)
+      expect(onButtonClick).toHaveBeenCalled()
     })
   })
 })
