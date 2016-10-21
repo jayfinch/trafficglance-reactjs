@@ -4,3 +4,4 @@
 .idea
 src/config.json
 coverage
+/npm-debug.log

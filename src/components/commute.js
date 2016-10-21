@@ -11,19 +11,22 @@ class Commute extends Component {
     if (fetchingTraffic) {
       return <img
         src='images/refresh-circle.svg'
-        className='img-responsive center-block rotate' />
+        className='refresh-btn-progress img-responsive center-block rotate'
+      />
     } else if (trafficData) {
-      const data = {
-        durationSeriousCongestion: trafficData.durationSeriousCongestion,
-        durationModerateCongestion: trafficData.durationModerateCongestion,
-        durationLowCongestion: trafficData.durationLowCongestion,
-        durationNoCongestion: trafficData.durationNoCongestion
-      }
-      return <Chart data={data} />
+      return <span className='chart-component'>
+        <Chart data={{
+          durationSeriousCongestion: trafficData.durationSeriousCongestion,
+          durationModerateCongestion: trafficData.durationModerateCongestion,
+          durationLowCongestion: trafficData.durationLowCongestion,
+          durationNoCongestion: trafficData.durationNoCongestion
+        }} />
+      </span>
     } else {
       return <img
         src='images/refresh-circle.svg'
-        className='img-responsive center-block' />
+        className='refresh-btn img-responsive center-block'
+      />
     }
   }
 

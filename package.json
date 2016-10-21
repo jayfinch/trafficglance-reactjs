@@ -11,7 +11,7 @@
     "start": "webpack-dev-server --progress --inline --hot --content-base src/",
     "build": "webpack --define process.env.NODE_ENV=\\\"production\\\" -p -c --progress --devtool source-map",
     "test": "jest",
-    "test:ci": "jest --watch",
+    "test:ci": "jest --watch --onlyChanged",
     "test:coverage": "jest --coverage",
     "lint": "eslint \"src/**/*.js\""
   },
