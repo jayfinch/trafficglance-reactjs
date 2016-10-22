@@ -1,0 +1,277 @@
+exports[`<Commute /> Should render chart 1`] = `
+<div
+  className="route col-sm-6 col-md-4">
+  <div
+    className="card">
+    <div
+      className="name">
+      <a
+        href="http://foo.com"
+        target="_blank">
+        foo
+      </a>
+      
+    </div>
+    <div
+      className="row">
+      <div
+        className="col-xs-5 col-sm-4 chart">
+        <button
+          className="fetch-button"
+          onClick={[Function]}
+          title="Refresh">
+          <span
+            className="chart-component">
+            <div
+              className={undefined}
+              data={
+                Object {
+                  "className": "img-responsive",
+                  "data": Array [
+                    Object {
+                      "color": "#e01e1b",
+                      "value": 1,
+                    },
+                    Object {
+                      "color": "#fc8d0d",
+                      "value": 2,
+                    },
+                    Object {
+                      "color": "#ede725",
+                      "value": 3,
+                    },
+                    Object {
+                      "color": "#45c43f",
+                      "value": 4,
+                    },
+                  ],
+                  "height": "90",
+                  "options": Object {
+                    "animateRotate": false,
+                    "animateScale": true,
+                    "animation": true,
+                    "animationSteps": 40,
+                    "percentageInnerCutout": 70,
+                    "segmentShowStroke": false,
+                    "showTooltips": false,
+                  },
+                  "width": "90",
+                }
+              }
+              height={undefined}
+              options={Object {}}
+              width={
+                Object {
+                  "enqueueCallback": [Function],
+                  "enqueueCallbackInternal": [Function],
+                  "enqueueElementInternal": [Function],
+                  "enqueueForceUpdate": [Function],
+                  "enqueueReplaceState": [Function],
+                  "enqueueSetState": [Function],
+                  "isMounted": [Function],
+                  "validateCallback": [Function],
+                }
+              } />
+          </span>
+        </button>
+      </div>
+      <div
+        className="col-xs-7 col-sm-8 stats">
+        <div
+          className="duration">
+          <span
+            className="nobreak">
+            <span
+              className="nobreak">
+              <span
+                className="unit">
+                 min
+              </span>
+            </span>
+          </span>
+        </div>
+        <div
+          className="detail">
+          <span
+            className="nobreak">
+            undefined mi
+          </span>
+        </div>
+        <div
+          className="detail">
+          <span
+            className="nobreak" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<Commute /> Should render image 1`] = `
+<div
+  className="route col-sm-6 col-md-4">
+  <div
+    className="card">
+    <div
+      className="name">
+      <a
+        href="http://foo.com"
+        target="_blank">
+        foo
+      </a>
+      
+    </div>
+    <div
+      className="row">
+      <div
+        className="col-xs-5 col-sm-4 chart">
+        <button
+          className="fetch-button"
+          onClick={[Function]}
+          title="Refresh">
+          <img
+            className="refresh-btn img-responsive center-block"
+            src="images/refresh-circle.svg" />
+        </button>
+      </div>
+      <div
+        className="col-xs-7 col-sm-8 stats">
+        <div
+          className="duration">
+          <span
+            className="nobreak">
+            –––
+          </span>
+        </div>
+        <div
+          className="detail">
+          <span
+            className="nobreak">
+            –––
+          </span>
+        </div>
+        <div
+          className="detail">
+          <span
+            className="nobreak">
+            –––
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<Commute /> Should render in-progress image 1`] = `
+<div
+  className="route col-sm-6 col-md-4">
+  <div
+    className="card">
+    <div
+      className="name">
+      <a
+        href="http://foo.com"
+        target="_blank">
+        foo
+      </a>
+      
+    </div>
+    <div
+      className="row">
+      <div
+        className="col-xs-5 col-sm-4 chart">
+        <button
+          className="fetch-button"
+          onClick={[Function]}
+          title="Refresh">
+          <img
+            className="refresh-btn-progress img-responsive center-block rotate"
+            src="images/refresh-circle.svg" />
+        </button>
+      </div>
+      <div
+        className="col-xs-7 col-sm-8 stats">
+        <div
+          className="duration">
+          <span
+            className="nobreak">
+            –––
+          </span>
+        </div>
+        <div
+          className="detail">
+          <span
+            className="nobreak">
+            –––
+          </span>
+        </div>
+        <div
+          className="detail">
+          <span
+            className="nobreak">
+            –––
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<Commute /> Should render placeholder name if not provided 1`] = `
+<div
+  className="route col-sm-6 col-md-4">
+  <div
+    className="card">
+    <div
+      className="name">
+      <a
+        href="http://foo.com"
+        target="_blank">
+        Your Commute
+      </a>
+      
+    </div>
+    <div
+      className="row">
+      <div
+        className="col-xs-5 col-sm-4 chart">
+        <button
+          className="fetch-button"
+          onClick={[Function]}
+          title="Refresh">
+          <img
+            className="refresh-btn img-responsive center-block"
+            src="images/refresh-circle.svg" />
+        </button>
+      </div>
+      <div
+        className="col-xs-7 col-sm-8 stats">
+        <div
+          className="duration">
+          <span
+            className="nobreak">
+            –––
+          </span>
+        </div>
+        <div
+          className="detail">
+          <span
+            className="nobreak">
+            –––
+          </span>
+        </div>
+        <div
+          className="detail">
+          <span
+            className="nobreak">
+            –––
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

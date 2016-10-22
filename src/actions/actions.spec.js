@@ -100,26 +100,26 @@ describe('actions', () => {
           expect(store.getActions()).toEqual(expectedActions)
         })
     })
-  })
 
-  it('Should handle failure', () => {
-    const expectedActions = [
-      {
-        type: type.FETCH_TRAFFIC_REQUEST,
-        id: 'foo-id'
-      },
-      {
-        type: type.FETCH_TRAFFIC_FAILURE,
-        error: 'bad-response',
-        id: 'foo-id'
-      }
+    it('Should handle failure', () => {
+      const expectedActions = [
+        {
+          type: type.FETCH_TRAFFIC_REQUEST,
+          id: 'foo-id'
+        },
+        {
+          type: type.FETCH_TRAFFIC_FAILURE,
+          error: 'bad-response',
+          id: 'foo-id'
+        }
 
-    ]
-    const store = mockStore()
+      ]
+      const store = mockStore()
 
-    return store.dispatch(actions.fetchTraffic('fail-url', 'foo-id'))
+      return store.dispatch(actions.fetchTraffic('fail-url', 'foo-id'))
       .then(() => {
         expect(store.getActions()).toEqual(expectedActions)
       })
+    })
   })
 })

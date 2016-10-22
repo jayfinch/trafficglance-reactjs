@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import Chart from './chart'
+import Chart from '../chart/chart'
 
 class Commute extends Component {
 

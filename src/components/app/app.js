@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react'
-import Commute from './commute'
+import Commute from '../commute/commute'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import * as actions from '../actions/actions'
-import { buildUrl } from '../utils/bing-api-helper'
+import * as actions from '../../actions/actions'
+import { buildUrl } from '../../utils/bing-api-helper'
 import 'whatwg-fetch'
 
 class App extends Component {
