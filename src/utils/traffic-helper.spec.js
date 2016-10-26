@@ -44,9 +44,9 @@ describe('trafficHelper', () => {
 
   describe('getArriveTime', () => {
     it('Should return arrival time', () => {
-      const currentTime = new Date(1395625613967)
-      const result = trafficHelper.getArriveTime({travelDurationTraffic: 60}, currentTime)
-      expect(result).toEqual('8:47 pm')
+      const currentTime = new Date(2016, 1, 1, 1, 0, 0)
+      const result = trafficHelper.getArriveTime({travelDurationTraffic: 2132}, currentTime)
+      expect(result).toEqual('1:35 am')
     })
   })
 
