@@ -1,7 +1,7 @@
-import { buildUrl } from './bing-api-helper'
+import { getApiUrl } from './bing-helper'
 
 describe('bingApiHelper', () => {
-  describe('buildUrl', () => {
+  describe('getApiUrl', () => {
     it('Should form bing traffic api request', () => {
       const segments = [
         {
@@ -21,7 +21,7 @@ describe('bingApiHelper', () => {
         }
       ]
 
-      const newUrl = buildUrl(segments, 'mi', 'mykey')
+      const newUrl = getApiUrl(segments, 'mi', 'mykey')
       expect(newUrl).toEqual('http://dev.virtualearth.net/REST/V1/Routes/Driving?&distanceUnit=mi&wp.0=45.060512,-92.074402&vwp.1=44.032439,-94.087854&wp.2=45.862776,-92.306506&key=mykey')
     })
   })

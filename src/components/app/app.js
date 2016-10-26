@@ -3,10 +3,10 @@ import Commute from '../commute/commute'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as actions from '../../actions/actions'
-import { buildUrl } from '../../utils/bing-api-helper'
+import { getApiUrl } from '../../utils/bing-helper'
 import 'whatwg-fetch'
 
-class App extends Component {
+export class App extends Component {
 
   componentDidMount () {
     this.props.actions.fetchConfig()
@@ -14,8 +14,12 @@ class App extends Component {
 
   fetchCommuteTraffic (i, segments) {
     const { distanceUnit, apiKey, actions } = this.props
-    const url = buildUrl(segments, distanceUnit, apiKey)
+    const url = getApiUrl(segments, distanceUnit, apiKey)
     actions.fetchTraffic(url, i)
+  }
+
+  onClickRefresh (i, segments) {
+    this.fetchCommuteTraffic(i, segments)
   }
 
   onClickRefreshAll (e) {
@@ -47,7 +51,7 @@ class App extends Component {
           url={commute.url}
           units={distanceUnit}
           fetchingTraffic={commute.fetchingTraffic}
-          fetchTraffic={() => this.fetchCommuteTraffic(i, commute.segments)}
+          fetchTraffic={this.onClickRefresh.bind(this, i, commute.segments)}
           trafficData={commute.trafficData}
           trafficError={commute.trafficError }/>
         )
@@ -99,13 +103,17 @@ App.propTypes = {
   configError: PropTypes.bool
 }
 
-function mapDispatchToProps (dispatch) {
+export function mapStateToProps (state) {
+  return {...state}
+}
+
+export function mapDispatchToProps (dispatch) {
   return {
     actions: bindActionCreators(actions, dispatch)
   }
 }
 
 export default connect(
-  (state) => ({...state}),
+  mapStateToProps,
   mapDispatchToProps
 )(App)

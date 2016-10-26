@@ -1,4 +1,4 @@
-export function buildUrl (segments, distanceUnit, apiKey) {
+export function getApiUrl (segments, distanceUnit, apiKey) {
   let url = 'http://dev.virtualearth.net/REST/V1/Routes/Driving?'
   url += `&distanceUnit=${distanceUnit}`
 

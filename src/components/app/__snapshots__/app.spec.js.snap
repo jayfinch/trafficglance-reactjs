@@ -1,0 +1,118 @@
+exports[`<App /> render Should render with commutes 1`] = `
+<div>
+  <div
+    className="toolbar">
+    <div
+      className="site-name">
+      TrafficGlance
+    </div>
+    <button
+      className="refresh-all"
+      onClick={[Function]}>
+      Refresh All
+    </button>
+  </div>
+  <div
+    className="container">
+    <div
+      className="row"
+      id="routes">
+      <div
+        className="route col-sm-6 col-md-4">
+        <div
+          className="card">
+          <div
+            className="name">
+            <a
+              href="bar"
+              target="_blank">
+              foo
+            </a>
+            
+          </div>
+          <div
+            className="row">
+            <div
+              className="col-xs-5 col-sm-4 chart">
+              <button
+                className="fetch-button"
+                onClick={[Function]}
+                title="Refresh">
+                <img
+                  className="refresh-btn img-responsive center-block"
+                  src="images/refresh-circle.svg" />
+              </button>
+            </div>
+            <div
+              className="col-xs-7 col-sm-8 stats">
+              <div
+                className="duration">
+                <span
+                  className="nobreak">
+                  –––
+                </span>
+              </div>
+              <div
+                className="detail">
+                <span
+                  className="nobreak">
+                  –––
+                </span>
+              </div>
+              <div
+                className="detail">
+                <span
+                  className="nobreak">
+                  –––
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="row credit">
+      <div
+        className="col-xs-12">
+        Powered by Bing™
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<App /> render Should render without config 1`] = `
+<div>
+  <div
+    className="toolbar">
+    <div
+      className="site-name">
+      TrafficGlance
+    </div>
+    <button
+      className="refresh-all"
+      onClick={[Function]}>
+      Refresh All
+    </button>
+  </div>
+  <div
+    className="container">
+    <div
+      className="row"
+      id="routes">
+      <div
+        className="loading">
+        You must set up your config
+      </div>
+    </div>
+    <div
+      className="row credit">
+      <div
+        className="col-xs-12">
+        Powered by Bing™
+      </div>
+    </div>
+  </div>
+</div>
+`;

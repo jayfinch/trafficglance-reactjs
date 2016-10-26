@@ -5,14 +5,11 @@ import App from './components/app/app'
 import configureStore from './store/configure-store'
 import './styles.less'
 
-const store = configureStore(undefined, module)
-const rootEl = document.getElementById('app')
-
-if (rootEl) {
-  render(
-    <Provider store={store}>
-      <App />
-    </Provider>,
-    rootEl
-  )
+export function injectApp (reactApp, rootEl) {
+  if (reactApp && rootEl) render(reactApp, rootEl)
 }
+
+const store = configureStore(undefined, module)
+const app = <Provider store={store}><App /></Provider>
+
+injectApp(app, document.getElementById('app'))

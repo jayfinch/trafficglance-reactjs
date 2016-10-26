@@ -1,17 +1,17 @@
-const getSubTree = jest.fn().mockImplementation(() => 'tree')
+const getSubTree = jest.fn(() => 'tree')
 
-const getDistance = jest.fn().mockImplementation(() => 'a')
+const getDistance = jest.fn(() => 'a')
 
-const getArriveTime = jest.fn().mockImplementation(() => 'b')
+const getArriveTime = jest.fn(() => 'b')
 
-const getDurationTime = jest.fn().mockImplementation(() => {
+const getDurationTime = jest.fn(() => {
   return {
     hours: 'c',
     minutes: 'd'
   }
 })
 
-const getDurationByCongestion = jest.fn().mockImplementation(() => {
+const getDurationByCongestion = jest.fn(() => {
   return {
     durationNoCongestion: 'e',
     durationLowCongestion: 'f',
