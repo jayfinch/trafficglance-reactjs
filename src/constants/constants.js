@@ -1,4 +1,4 @@
-export default {
+export const type = {
   FETCH_CONFIG_REQUEST: 'fetch-config-requested',
   FETCH_CONFIG_SUCCESS: 'fetch-config-success',
   FETCH_CONFIG_FAILURE: 'fetch-config-failure',

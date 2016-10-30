@@ -1,7 +1,7 @@
-import type from './constants'
+import { type } from '../constants/constants'
 import fetchJsonp from 'fetch-jsonp'
-import * as commutesHelper from '../utils/commutes-helper'
-import * as trafficHelper from '../utils/traffic-helper'
+import * as commutesHelper from '../helpers/commutes-helper'
+import * as trafficHelper from '../helpers/traffic-helper'
 
 function parseResponse (response) {
   if (!response.ok) {

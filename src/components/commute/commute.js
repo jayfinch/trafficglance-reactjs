@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import Chart from '../chart/chart'
+import './commute.less'
 
 class Commute extends Component {
 
@@ -11,7 +12,7 @@ class Commute extends Component {
     if (fetchingTraffic) {
       return <img
         src='images/refresh-circle.svg'
-        className='refresh-btn-progress img-responsive center-block rotate'
+        className='card__refresh-btn card__refresh-btn--progress img-responsive center-block'
       />
     } else if (trafficData) {
       return <span className='chart-component'>
@@ -25,7 +26,7 @@ class Commute extends Component {
     } else {
       return <img
         src='images/refresh-circle.svg'
-        className='refresh-btn img-responsive center-block'
+        className='card__refresh-btn img-responsive center-block'
       />
     }
   }
@@ -43,7 +44,7 @@ class Commute extends Component {
     return (
       <div className='route col-sm-6 col-md-4'>
         <div className='card'>
-          <div className='name'>
+          <div className='card__name'>
             <a href={url} target='_blank'>
               {name || 'Your Commute'}
             </a>
@@ -60,28 +61,29 @@ class Commute extends Component {
               <button
                 title='Refresh'
                 onClick={(e) => this.onClickRefresh(e)}
-                className='fetch-button'>
+                className='card__fetch-button'>
                   {this.getImage(fetchingTraffic, trafficData)}
               </button>
             </div>
-            <div className='col-xs-7 col-sm-8 stats'>
-              <div className='duration'>
-                <span className='nobreak'>{trafficData
-                  ? <span className='nobreak'>{trafficData.minutes}
-                      <span className='unit'>&nbsp;min</span>
+            <div className='col-xs-7 col-sm-8 card-stats'>
+
+              <div className='card-stats__duration'>
+                {trafficData
+                  ? <span>
+                      {trafficData.minutes}
+                        <span className='card-stats__unit'>&nbsp;min</span>
                     </span>
-                  : '–––'}</span>
+                  : '–––'}
               </div>
-              <div className='detail'>
-                <span className='nobreak'>{trafficData
-                  ? trafficData.distance + ' ' + units
-                  : '–––'}</span>
+
+              <div className='card-stats__detail'>
+                {trafficData ? trafficData.distance + ' ' + units : '–––'}
               </div>
-              <div className='detail'>
-                <span className='nobreak'>{trafficData
-                  ? trafficData.arriveTime
-                  : '–––'}</span>
+
+              <div className='card-stats__detail'>
+                {trafficData ? trafficData.arriveTime : '–––'}
               </div>
+
             </div>
           </div>
         </div>

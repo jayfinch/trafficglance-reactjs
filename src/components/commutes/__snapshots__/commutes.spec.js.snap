@@ -1,0 +1,61 @@
+exports[`<Commutes /> render Should render with commutes 1`] = `
+<div
+  className="row"
+  id="routes">
+  <div
+    className="route col-sm-6 col-md-4">
+    <div
+      className="card">
+      <div
+        className="card__name">
+        <a
+          href="bar"
+          target="_blank">
+          foo
+        </a>
+        
+      </div>
+      <div
+        className="row">
+        <div
+          className="col-xs-5 col-sm-4 chart">
+          <button
+            className="card__fetch-button"
+            onClick={[Function]}
+            title="Refresh">
+            <img
+              className="card__refresh-btn img-responsive center-block"
+              src="images/refresh-circle.svg" />
+          </button>
+        </div>
+        <div
+          className="col-xs-7 col-sm-8 card-stats">
+          <div
+            className="card-stats__duration">
+            –––
+          </div>
+          <div
+            className="card-stats__detail">
+            –––
+          </div>
+          <div
+            className="card-stats__detail">
+            –––
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<Commutes /> render Should render without config 1`] = `
+<div
+  className="row"
+  id="routes">
+  <div
+    className="loading">
+    You must set up your config
+  </div>
+</div>
+`;

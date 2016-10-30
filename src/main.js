@@ -1,9 +1,9 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
-import App from './components/app/app'
+import App from './containers/app/app'
 import configureStore from './store/configure-store'
-import './styles.less'
+import 'whatwg-fetch'
 
 export function injectApp (reactApp, rootEl) {
   if (reactApp && rootEl) render(reactApp, rootEl)

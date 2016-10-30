@@ -1,5 +1,6 @@
 'use strict'
 let path = require('path')
+var CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
   entry: {
@@ -9,6 +10,20 @@ module.exports = {
     path: path.join(__dirname, 'dist'),
     filename: '[name].bundle.js'
   },
+  plugins: [
+    new CopyWebpackPlugin([
+      { from: 'src/index.html' },
+      { from: 'src/config-example.json' },
+      {
+        from: 'src/images',
+        to: 'images'
+      },
+      {
+        from: 'src/styles/bootstrap.min.css',
+        to: 'styles/bootstrap.min.css'
+      }
+    ])
+  ],
   devtool: 'cheap-source-map',
   module: {
     noParse: ['react'],

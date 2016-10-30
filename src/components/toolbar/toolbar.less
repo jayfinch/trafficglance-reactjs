@@ -1,0 +1,30 @@
+@import (reference) "../../styles/constants.less";
+
+.toolbar {
+  height: @toolbar-height;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  z-index: 1;
+  text-align: center;
+  background: #fff;
+  border-bottom: solid 1px rgba(0,0,0,.15);
+
+  &__site-name {
+    padding-top: 14px;
+    font-size: 16px;
+  }
+
+  &__refresh-all {
+    position: absolute;
+    top: 14px;
+    right: 15px;
+    border: none;
+    padding: none;
+    margin: none;
+    background: none;
+    font-size: 14px;
+    color: #337ab7;
+  }
+}

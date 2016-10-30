@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "start": "webpack-dev-server --progress --inline --hot --content-base src/",
-    "build": "webpack --define process.env.NODE_ENV=\\\"production\\\" -p -c --progress --devtool source-map",
+    "build": "webpack -p",
     "test": "jest",
     "test:ci": "jest --watch --onlyChanged",
     "test:coverage": "jest --coverage",
@@ -26,6 +26,7 @@
     "babel-preset-es2015": "6.16.0",
     "babel-preset-react": "6.16.0",
     "chart.js": "1.0.2",
+    "copy-webpack-plugin": "4.0.0",
     "css-loader": "0.25.0",
     "enzyme": "2.5.1",
     "eslint-config-standard": "6.2.0",

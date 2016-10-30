@@ -1,0 +1,24 @@
+exports[`<Toolbar /> render Should render with refresh button 1`] = `
+<div
+  className="toolbar">
+  <div
+    className="toolbar__site-name">
+    TrafficGlance
+  </div>
+  <button
+    className="toolbar__refresh-all"
+    onClick={[Function]}>
+    Refresh All
+  </button>
+</div>
+`;
+
+exports[`<Toolbar /> render Should render without refresh button 1`] = `
+<div
+  className="toolbar">
+  <div
+    className="toolbar__site-name">
+    TrafficGlance
+  </div>
+</div>
+`;

@@ -3,13 +3,12 @@ import { bindActionCreators } from 'redux'
 import * as actions from '../../actions/actions'
 import { App, mapStateToProps, mapDispatchToProps } from './app'
 import renderer from 'react-test-renderer'
-import {shallow} from 'enzyme'
 
 jest.mock('redux', () => ({
   bindActionCreators: jest.fn(() => ({}))
 }))
 
-jest.mock('../../utils/bing-helper', () => {
+jest.mock('../../helpers/bing-helper', () => {
   return { getApiUrl: jest.fn(() => 'mock-url') }
 })
 
@@ -19,7 +18,7 @@ jest.mock('../../actions/actions', () => {
 
 describe('<App />', () => {
   describe('render', () => {
-    it('Should render without config', () => {
+    it('Should render', () => {
       let tree = renderer.create(
         <App
           actions={{
@@ -34,67 +33,6 @@ describe('<App />', () => {
       ).toJSON()
 
       expect(tree).toMatchSnapshot()
-    })
-
-    it('Should render with commutes', () => {
-      let tree = renderer.create(
-        <App
-          actions={{
-            fetchConfig: jest.fn(),
-            fetchTraffic: jest.fn()
-          }}
-          commutes={[
-            {
-              id: 0,
-              name: 'foo',
-              url: 'bar',
-              fetchingTraffic: false
-            }
-          ]}
-          distanceUnit='mi'
-          apiKey='apikey'
-          configError={false}
-        />
-      ).toJSON()
-
-      expect(tree).toMatchSnapshot()
-    })
-
-    it('Should handle clicking refresh-all button', () => {
-      const mockActions = {
-        fetchConfig: jest.fn(),
-        fetchTraffic: jest.fn()
-      }
-
-      let component = <App
-        actions={mockActions}
-        commutes={[
-          {
-            id: 0,
-            name: 'foo',
-            url: 'bar',
-            fetchingTraffic: false,
-            segments: []
-          },
-          {
-            id: 1,
-            name: 'a',
-            url: 'b',
-            fetchingTraffic: false,
-            segments: []
-          }
-        ]}
-        distanceUnit='mi'
-        apiKey='apikey'
-        configError={false}
-      />
-
-      const wrapper = shallow(component)
-
-      wrapper.find('.refresh-all').simulate('click', { preventDefault () {} })
-
-      expect(mockActions.fetchTraffic).toHaveBeenCalledWith('mock-url', 0)
-      expect(mockActions.fetchTraffic).toHaveBeenCalledWith('mock-url', 1)
     })
   })
 
@@ -117,6 +55,44 @@ describe('<App />', () => {
 
       instance.onClickRefresh(7, [])
       expect(mockActions.fetchTraffic).toHaveBeenCalledWith('mock-url', 7)
+    })
+  })
+
+  describe('onClickRefreshAll', () => {
+    it('Should call fetchTraffic', () => {
+      let instance = null
+      const mockActions = {
+        fetchConfig: jest.fn(),
+        fetchTraffic: jest.fn()
+      }
+
+      renderer.create(<App
+        actions={mockActions}
+        commutes={[
+          {
+            id: 0,
+            name: 'foo',
+            url: 'bar',
+            fetchingTraffic: false,
+            segments: []
+          },
+          {
+            id: 1,
+            name: 'a',
+            url: 'b',
+            fetchingTraffic: false,
+            segments: []
+          }
+        ]}
+        distanceUnit='mi'
+        apiKey='apikey'
+        configError={false}
+        ref={(ref) => { instance = ref }}
+      />)
+
+      instance.onClickRefreshAll()
+      expect(mockActions.fetchTraffic).toHaveBeenCalledWith('mock-url', 0)
+      expect(mockActions.fetchTraffic).toHaveBeenCalledWith('mock-url', 1)
     })
   })
 

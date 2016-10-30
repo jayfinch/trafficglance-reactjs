@@ -1,0 +1,77 @@
+.card {
+    background: white;
+    border: solid 1px rgba(0,0,0,.15);
+    padding: 15px;
+    box-shadow: 0px 1px 0px rgba(0,0,0,.15);
+    border-radius: 3px;
+    margin-bottom: 15px;
+
+  &__name {
+    margin-bottom: 15px;
+    border-bottom: solid 1px rgba(0,0,0,.15);
+    padding: 0 15px 15px 15px;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0 -15px 15px -15px;
+  }
+
+  &__fetch-button {
+    border: none;
+    margin: 0;
+    padding: 0;
+    background: none;
+    display: block;
+    width: 100%;
+  }
+
+  &__refresh-btn {
+    width: 100%;
+    height: auto ;
+
+    &--progress {
+      animation-name: spin;
+      animation-duration: 2000ms;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+    }
+
+    @keyframes spin {
+      from { transform:rotate(0deg); }
+      to { transform:rotate(360deg); }
+    }
+  }
+}
+
+
+.card-stats {
+  text-transform: uppercase;
+
+  &__duration {
+    font-size: 40px;
+  }
+
+  &__detail {
+    font-size: 16px;
+    color: #999;
+  }
+
+  &__unit {
+    font-size: 16px;
+    color: #999;
+  }
+}
+
+
+// warnings
+
+ul.warnings {
+  list-style: none;
+  margin: 0;
+  padding: 20px 0 0 0;
+  color: #fc8d0d;
+
+  li {
+    margin: 0;
+    padding: 0 0 10px 0
+  }
+}

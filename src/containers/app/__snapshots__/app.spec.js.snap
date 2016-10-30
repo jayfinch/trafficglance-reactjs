@@ -1,0 +1,29 @@
+exports[`<App /> render Should render 1`] = `
+<div>
+  <div
+    className="toolbar">
+    <div
+      className="toolbar__site-name">
+      TrafficGlance
+    </div>
+  </div>
+  <div
+    className="container">
+    <div
+      className="row"
+      id="routes">
+      <div
+        className="loading">
+        You must set up your config
+      </div>
+    </div>
+    <div
+      className="row footer">
+      <div
+        className="col-xs-12">
+        Powered by Bing™
+      </div>
+    </div>
+  </div>
+</div>
+`;

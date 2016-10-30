@@ -1,5 +1,6 @@
 # TrafficGlance [![Build Status](https://travis-ci.org/jayfinch/trafficglance-reactjs.svg?branch=master)](https://travis-ci.org/jayfinch/trafficglance-reactjs)
 
+<img src="https://raw.githubusercontent.com/jayfinch/trafficglance-reactjs/master/src/images/screenshot.png" width="320" height="568">
 
 Quickly see traffic conditions without all the clutter. Personalize your routes, host it how you'd like.
 
@@ -28,7 +29,7 @@ Save this URL for later.
 
 ### 3. Create your config file
 
-Rename `config-example.json` as `config.json`.
+Go into the `dist` folder and rename `config-example.json` to `config.json`.
 
 Edit this file and paste in your API key from step 1.
 
@@ -40,7 +41,7 @@ Place the contents of `dist` on your web server. The app will work either at the
 
 ## Advanced config options
 
-### Auto load based on time of day
+### Auto-load based on time of day
 
 Specify a `startTime` and `endTime` in your routes. If it's currently within that timeframe when opening TrafficGlance, the app will automatically fetch traffic information for those routes and display them at the top for quick viewing.
 
@@ -53,6 +54,18 @@ Specify a `startTime` and `endTime` in your routes. If it's currently within tha
 
 ### Units
 You may specify `units` as `mi` or `km`
+
+## Developer Guide
+You must have Node installed.
+* Install dependencies: `npm install`
+* Run development server: `npm start` and visit http://localhost:8080/
+* Run tests: `npm test`
+* Compile files to put on your own server: `npm run build`
+
+Known Issues:
+* Bing changed their URL structure recently. Need to update rx accordingly.
+* Traffic incidents aren't showing
+* Auto-load by time functionality not yet implemented
 
 
 ## Disclaimer

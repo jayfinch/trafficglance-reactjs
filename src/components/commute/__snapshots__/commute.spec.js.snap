@@ -4,7 +4,7 @@ exports[`<Commute /> Should render chart 1`] = `
   <div
     className="card">
     <div
-      className="name">
+      className="card__name">
       <a
         href="http://foo.com"
         target="_blank">
@@ -17,7 +17,7 @@ exports[`<Commute /> Should render chart 1`] = `
       <div
         className="col-xs-5 col-sm-4 chart">
         <button
-          className="fetch-button"
+          className="card__fetch-button"
           onClick={[Function]}
           title="Refresh">
           <span
@@ -76,32 +76,22 @@ exports[`<Commute /> Should render chart 1`] = `
         </button>
       </div>
       <div
-        className="col-xs-7 col-sm-8 stats">
+        className="col-xs-7 col-sm-8 card-stats">
         <div
-          className="duration">
-          <span
-            className="nobreak">
+          className="card-stats__duration">
+          <span>
             <span
-              className="nobreak">
-              <span
-                className="unit">
-                 min
-              </span>
+              className="card-stats__unit">
+               min
             </span>
           </span>
         </div>
         <div
-          className="detail">
-          <span
-            className="nobreak">
-            undefined mi
-          </span>
+          className="card-stats__detail">
+          undefined mi
         </div>
         <div
-          className="detail">
-          <span
-            className="nobreak" />
-        </div>
+          className="card-stats__detail" />
       </div>
     </div>
   </div>
@@ -114,7 +104,7 @@ exports[`<Commute /> Should render image 1`] = `
   <div
     className="card">
     <div
-      className="name">
+      className="card__name">
       <a
         href="http://foo.com"
         target="_blank">
@@ -127,36 +117,27 @@ exports[`<Commute /> Should render image 1`] = `
       <div
         className="col-xs-5 col-sm-4 chart">
         <button
-          className="fetch-button"
+          className="card__fetch-button"
           onClick={[Function]}
           title="Refresh">
           <img
-            className="refresh-btn img-responsive center-block"
+            className="card__refresh-btn img-responsive center-block"
             src="images/refresh-circle.svg" />
         </button>
       </div>
       <div
-        className="col-xs-7 col-sm-8 stats">
+        className="col-xs-7 col-sm-8 card-stats">
         <div
-          className="duration">
-          <span
-            className="nobreak">
-            –––
-          </span>
+          className="card-stats__duration">
+          –––
         </div>
         <div
-          className="detail">
-          <span
-            className="nobreak">
-            –––
-          </span>
+          className="card-stats__detail">
+          –––
         </div>
         <div
-          className="detail">
-          <span
-            className="nobreak">
-            –––
-          </span>
+          className="card-stats__detail">
+          –––
         </div>
       </div>
     </div>
@@ -170,7 +151,7 @@ exports[`<Commute /> Should render in-progress image 1`] = `
   <div
     className="card">
     <div
-      className="name">
+      className="card__name">
       <a
         href="http://foo.com"
         target="_blank">
@@ -183,36 +164,27 @@ exports[`<Commute /> Should render in-progress image 1`] = `
       <div
         className="col-xs-5 col-sm-4 chart">
         <button
-          className="fetch-button"
+          className="card__fetch-button"
           onClick={[Function]}
           title="Refresh">
           <img
-            className="refresh-btn-progress img-responsive center-block rotate"
+            className="card__refresh-btn card__refresh-btn--progress img-responsive center-block"
             src="images/refresh-circle.svg" />
         </button>
       </div>
       <div
-        className="col-xs-7 col-sm-8 stats">
+        className="col-xs-7 col-sm-8 card-stats">
         <div
-          className="duration">
-          <span
-            className="nobreak">
-            –––
-          </span>
+          className="card-stats__duration">
+          –––
         </div>
         <div
-          className="detail">
-          <span
-            className="nobreak">
-            –––
-          </span>
+          className="card-stats__detail">
+          –––
         </div>
         <div
-          className="detail">
-          <span
-            className="nobreak">
-            –––
-          </span>
+          className="card-stats__detail">
+          –––
         </div>
       </div>
     </div>
@@ -226,7 +198,7 @@ exports[`<Commute /> Should render placeholder name if not provided 1`] = `
   <div
     className="card">
     <div
-      className="name">
+      className="card__name">
       <a
         href="http://foo.com"
         target="_blank">
@@ -239,36 +211,27 @@ exports[`<Commute /> Should render placeholder name if not provided 1`] = `
       <div
         className="col-xs-5 col-sm-4 chart">
         <button
-          className="fetch-button"
+          className="card__fetch-button"
           onClick={[Function]}
           title="Refresh">
           <img
-            className="refresh-btn img-responsive center-block"
+            className="card__refresh-btn img-responsive center-block"
             src="images/refresh-circle.svg" />
         </button>
       </div>
       <div
-        className="col-xs-7 col-sm-8 stats">
+        className="col-xs-7 col-sm-8 card-stats">
         <div
-          className="duration">
-          <span
-            className="nobreak">
-            –––
-          </span>
+          className="card-stats__duration">
+          –––
         </div>
         <div
-          className="detail">
-          <span
-            className="nobreak">
-            –––
-          </span>
+          className="card-stats__detail">
+          –––
         </div>
         <div
-          className="detail">
-          <span
-            className="nobreak">
-            –––
-          </span>
+          className="card-stats__detail">
+          –––
         </div>
       </div>
     </div>

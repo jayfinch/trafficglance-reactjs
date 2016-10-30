@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { Doughnut } from 'react-chartjs'
+import './chart.less'
 
 class Chart extends Component {
   render () {

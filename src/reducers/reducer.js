@@ -1,4 +1,4 @@
-import type from '../actions/constants'
+import { type } from '../constants/constants'
 
 const initialState = {
   apiKey: 'no-key-defined',

@@ -1,11 +1,11 @@
 import * as actions from './actions'
-import * as commutesHelper from './../utils/commutes-helper'
-import type from './constants'
+import * as commutesHelper from './../helpers/commutes-helper'
+import { type } from '../constants/constants'
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 
-jest.mock('../utils/commutes-helper.js')
-jest.mock('../utils/traffic-helper.js')
+jest.mock('../helpers/commutes-helper.js')
+jest.mock('../helpers/traffic-helper.js')
 jest.mock('fetch-jsonp')
 
 const middlewares = [ thunk ]
